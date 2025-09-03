@@ -1,0 +1,504 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CnfmReq",
+  "type": "object",
+  "properties": {
+    "CnfmReqID": {
+      "type": "string",
+      "fixmlTypeName": "ConfirmReqID_t",
+      "description": "Unique identifier for a Confirmation Request message"
+    },
+    "CnfmTyp": {
+      "type": "string",
+      "fixmlTypeName": "ConfirmType_t"
+    },
+    "AllocID": {
+      "type": "string",
+      "fixmlTypeName": "AllocID_t",
+      "description": "Unique identifier for allocation message. \n                    (Prior to FIX 4.1 this field was of type int)"
+    },
+    "AllocID2": {
+      "type": "string",
+      "fixmlTypeName": "SecondaryAllocID_t",
+      "description": "Secondary allocation identifier. Unlike the AllocID (70), this can be shared across a number of allocation instruction or allocation report messages, thereby making it possible to pass an identifier for an original allocation message on multiple messages (e.g. from one party to a second to a third, across cancel and replace messages etc.)."
+    },
+    "IndAllocID": {
+      "type": "string",
+      "fixmlTypeName": "IndividualAllocID_t",
+      "description": "Unique identifier for a specific NoAllocs (78) repeating group instance (e.g. for an AllocAccount)."
+    },
+    "TxnTm": {
+      "type": "string",
+      "fixmlTypeName": "TransactTime_t",
+      "description": "Timestamp when the business transaction represented by the message occurred."
+    },
+    "Acct": {
+      "type": "string",
+      "fixmlTypeName": "AllocAccount_t",
+      "description": "Sub-account mnemonic"
+    },
+    "ActIDSrc": {
+      "type": "string",
+      "fixmlTypeName": "AllocAcctIDSource_t"
+    },
+    "AcctTyp": {
+      "type": "string",
+      "fixmlTypeName": "AllocAccountType_t"
+    },
+    "Txt": {
+      "type": "string",
+      "fixmlTypeName": "Text_t",
+      "description": "Free format text string \n                    (Note: this field does not have a specified maximum length)"
+    },
+    "EncTxtLen": {
+      "type": "string",
+      "fixmlTypeName": "EncodedTextLen_t",
+      "description": "Byte length of encoded (non-ASCII characters) EncodedText (355) field."
+    },
+    "EncTxt": {
+      "type": "string",
+      "format": "base64",
+      "fixmlTypeName": "EncodedText_t",
+      "description": "Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field. If used, the ASCII (English) representation should also be specified in the Text(58) field."
+    },
+    "OrdAlloc": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ClOrdID": {
+            "type": "string",
+            "fixmlTypeName": "ClOrdID_t",
+            "description": "Unique identifier for Order as assigned by the buy-side (institution, broker, intermediary etc.) (identified by SenderCompID(49) or OnBehalfOfCompID(115) as appropriate). Uniqueness must be guaranteed within a single trading day. Firms, particularly those which electronically submit multi-day orders, trade globally or throughout market close periods, should ensure uniqueness across days, for example by embedding a date within the ClOrdID(11) field."
+          },
+          "OrdID": {
+            "type": "string",
+            "fixmlTypeName": "OrderID_t",
+            "description": "Unique identifier for Order as assigned by sell-side (broker, exchange, ECN). Uniqueness must be guaranteed within a single trading day. Firms which accept multi-day orders should consider embedding a date within the OrderID field to assure uniqueness across days."
+          },
+          "OrdID2": {
+            "type": "string",
+            "fixmlTypeName": "SecondaryOrderID_t",
+            "description": "Assigned by the party which accepts the order. Can be used to provide the OrderID (37) used by an exchange or executing system."
+          },
+          "ClOrdID2": {
+            "type": "string",
+            "fixmlTypeName": "SecondaryClOrdID_t",
+            "description": "Assigned by the party which originates the order. Can be used to provide the ClOrdID (11) used by an exchange or executing system."
+          },
+          "ListID": {
+            "type": "string",
+            "fixmlTypeName": "ListID_t",
+            "description": "Unique identifier for list as assigned by institution, used to associate multiple individual orders. Uniqueness must be guaranteed within a single trading day. Firms which generate multi-day orders should consider embedding a date within the ListID field to assure uniqueness across days."
+          },
+          "Qty": {
+            "type": "string",
+            "fixmlTypeName": "OrderQty_t",
+            "description": "Quantity ordered. This represents the number of shares for equities or par, face or nominal value for FI instruments. \n                    (Prior to FIX 4.2 this field was of type int)"
+          },
+          "AvgPx": {
+            "type": "string",
+            "fixmlTypeName": "OrderAvgPx_t",
+            "description": "Average price for a specific order"
+          },
+          "BkngQty": {
+            "type": "string",
+            "fixmlTypeName": "OrderBookingQty_t",
+            "description": "Quantity of the order that is being booked out as part of an Allocation Instruction or Allocation Report message"
+          },
+          "OrdTyp": {
+            "type": "string",
+            "fixmlTypeName": "OrdType_t"
+          },
+          "Pty": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ID": {
+                  "type": "string",
+                  "fixmlTypeName": "Nested2PartyID_t",
+                  "description": "PartyID value within a \"second instance\" Nested repeating group. \n                    Same values as PartyID (448)"
+                },
+                "Src": {
+                  "type": "string",
+                  "fixmlTypeName": "Nested2PartyIDSource_t"
+                },
+                "R": {
+                  "type": "string",
+                  "fixmlTypeName": "Nested2PartyRole_t"
+                },
+                "Qual": {
+                  "type": "string",
+                  "fixmlTypeName": "Nested2PartyRoleQualifier_t"
+                },
+                "Sub": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "Nested2PartySubID_t",
+                        "description": "PartySubID value within a \"second instance\" Nested repeating group. \n                    Same values as PartySubID (523)"
+                      },
+                      "Typ": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "fixmlTypeName": "PartySubIDType_enum_t",
+                            "enum": [
+                              "Firm",
+                              "Person",
+                              "System",
+                              "Application",
+                              "Full legal name of firm",
+                              "Postal address",
+                              "Phone number",
+                              "Email address",
+                              "Contact name",
+                              "Securities account number (for settlement instructions)",
+                              "Registration number (for settlement instructions and confirmations)",
+                              "Registered address (for confirmation purposes)",
+                              "Regulatory status (for confirmation purposes)",
+                              "Registration name (for settlement instructions)",
+                              "Cash account number (for settlement instructions)",
+                              "BIC",
+                              "CSD participant member code",
+                              "Registered address",
+                              "Fund account name",
+                              "Telex number",
+                              "Fax number",
+                              "Securities account name",
+                              "Cash account name",
+                              "Department",
+                              "Location desk",
+                              "Position account type",
+                              "Security locate ID",
+                              "Market maker",
+                              "Eligible counterparty",
+                              "Professional client",
+                              "Location",
+                              "Execution venue",
+                              "Currency delivery identifier",
+                              "Address City",
+                              "Address State/Province",
+                              "Address Postal Code",
+                              "Address Street",
+                              "Address Country (ISO country code)",
+                              "ISO country code",
+                              "Market segment",
+                              "Customer account type",
+                              "Omnibus account",
+                              "Funds segregation type",
+                              "Guarantee fund",
+                              "Swap dealer",
+                              "Major participant",
+                              "Financial entity",
+                              "U.S. person",
+                              "Reporting entity indicator",
+                              "Elected clearing requirement exception",
+                              "Business center",
+                              "Reference text",
+                              "Short-marking exempt account",
+                              "Parent firm identifier",
+                              "Parent firm name",
+                              "Deal identifier",
+                              "System trade identifier",
+                              "System trade sub-identifier",
+                              "Futures Commission Merchant (FCM) code",
+                              "Delivery terminal customer account/code",
+                              "Voluntary reporting entity",
+                              "Reporting obligation jurisdiction",
+                              "Voluntary reporting jurisdiction",
+                              "Company activities",
+                              "European Economic Area domiciled",
+                              "Contract linked to commercial or treasury financing for this counterparty",
+                              "Contract above clearing threshold for this counterparty",
+                              "Voluntary reporting party",
+                              "End user",
+                              "Location or jurisdiction",
+                              "Derivatives dealer",
+                              "Domicile",
+                              "Exempt from recognition",
+                              "Payer",
+                              "Receiver",
+                              "Systematic Internaliser (SI)",
+                              "Publishing entity indicator",
+                              "First name",
+                              "Surname",
+                              "Date of birth",
+                              "Order transmitting firm",
+                              "Order transmitting firm for buyer",
+                              "Order transmitter for seller",
+                              "Legal Entity Identifier (ISO 17442) LEI",
+                              "Sub-sector classification",
+                              "Party side",
+                              "Legal registration country"
+                            ],
+                            "enumKey": [
+                              "1",
+                              "2",
+                              "3",
+                              "4",
+                              "5",
+                              "6",
+                              "7",
+                              "8",
+                              "9",
+                              "10",
+                              "11",
+                              "12",
+                              "13",
+                              "14",
+                              "15",
+                              "16",
+                              "17",
+                              "18",
+                              "19",
+                              "20",
+                              "21",
+                              "22",
+                              "23",
+                              "24",
+                              "25",
+                              "26",
+                              "27",
+                              "28",
+                              "29",
+                              "30",
+                              "31",
+                              "32",
+                              "33",
+                              "34",
+                              "35",
+                              "36",
+                              "37",
+                              "38",
+                              "39",
+                              "40",
+                              "41",
+                              "42",
+                              "43",
+                              "44",
+                              "45",
+                              "46",
+                              "47",
+                              "48",
+                              "49",
+                              "50",
+                              "51",
+                              "52",
+                              "53",
+                              "54",
+                              "55",
+                              "56",
+                              "57",
+                              "58",
+                              "59",
+                              "60",
+                              "61",
+                              "62",
+                              "63",
+                              "64",
+                              "65",
+                              "66",
+                              "67",
+                              "68",
+                              "69",
+                              "70",
+                              "71",
+                              "72",
+                              "73",
+                              "74",
+                              "75",
+                              "76",
+                              "77",
+                              "78",
+                              "79",
+                              "80",
+                              "81",
+                              "82",
+                              "83",
+                              "84",
+                              "85",
+                              "86",
+                              "87"
+                            ],
+                            "description": "Type of PartySubID(523) value."
+                          },
+                          {
+                            "type": "integer",
+                            "fixmlTypeName": "Reserved4000Plus",
+                            "minimum": 4000,
+                            "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                          }
+                        ]
+                      }
+                    },
+                    "fixmlComponent": "Sub"
+                  },
+                  "fixmlRepeating": true
+                }
+              },
+              "fixmlComponent": "Pty"
+            },
+            "fixmlRepeating": true
+          }
+        },
+        "fixmlComponent": "OrdAlloc"
+      },
+      "fixmlRepeating": true
+    }
+  },
+  "required": [
+    "CnfmReqID",
+    "CnfmTyp",
+    "TxnTm"
+  ],
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "Hdr": {
+          "type": "object",
+          "properties": {},
+          "fixmlComponent": "Hdr",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "MsgTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgType_t"
+                },
+                "ApplVerID": {
+                  "type": "string",
+                  "fixmlTypeName": "ApplVerID_t"
+                },
+                "SID": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderCompID_t",
+                  "description": "Assigned value used to identify firm sending message."
+                },
+                "TID": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetCompID_t",
+                  "description": "Assigned value used to identify receiving firm."
+                },
+                "OBID": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfCompID_t",
+                  "description": "Assigned value used to identify firm originating message if the message was delivered by a third party i.e. the third party firm identifier would be delivered in the SenderCompID field and the firm originating the message in this field."
+                },
+                "D2ID": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToCompID_t",
+                  "description": "Assigned value used to identify the firm targeted to receive the message if the message is delivered by a third party i.e. the third party firm identifier would be delivered in the TargetCompID (56) field and the ultimate receiver firm ID in this field."
+                },
+                "SeqNum": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgSeqNum_t",
+                  "description": "Integer message sequence number."
+                },
+                "SSub": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderSubID_t",
+                  "description": "Assigned value used to identify specific message originator (desk, trader, etc.)"
+                },
+                "SLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader)"
+                },
+                "TSub": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetSubID_t",
+                  "description": "Assigned value used to identify specific individual or unit intended to receive message. \"ADMIN\" reserved for administrative messages not intended for a specific user."
+                },
+                "TLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetLocationID_t",
+                  "description": "Assigned value used to identify specific message destination's location (i.e. geographic location and/or desk, trader)"
+                },
+                "OBSub": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfSubID_t",
+                  "description": "Assigned value used to identify specific message originator (i.e. trader) if the message was delivered by a third party"
+                },
+                "OBLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "D2Sub": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToSubID_t",
+                  "description": "Assigned value used to identify specific message recipient (i.e. trader) if the message is delivered by a third party"
+                },
+                "D2Loc": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToLocationID_t",
+                  "description": "Assigned value used to identify specific message recipient's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "PosDup": {
+                  "type": "string",
+                  "fixmlTypeName": "PossDupFlag_t"
+                },
+                "PosRsnd": {
+                  "type": "string",
+                  "fixmlTypeName": "PossResend_t"
+                },
+                "Snt": {
+                  "type": "string",
+                  "fixmlTypeName": "SendingTime_t",
+                  "description": "Time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\")"
+                },
+                "OrigSnt": {
+                  "type": "string",
+                  "fixmlTypeName": "OrigSendingTime_t",
+                  "description": "Original time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\") when transmitting orders as the result of a resend request."
+                },
+                "MsgEncd": {
+                  "type": "string",
+                  "fixmlTypeName": "MessageEncoding_t",
+                  "description": "Type of message encoding (non-ASCII (non-English) characters) used in a message's \"Encoded\" fields."
+                },
+                "Hop": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "HopCompID_t",
+                        "description": "Assigned value used to identify the third party firm which delivered a specific message either from the firm which originated the message or from another third party (if multiple \"hops\" are performed). It is recommended that this value be the SenderCompID (49) of the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Snt": {
+                        "type": "string",
+                        "fixmlTypeName": "HopSendingTime_t",
+                        "description": "Time that HopCompID (628) sent the message. It is recommended that this value be the SendingTime (52) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Ref": {
+                        "type": "string",
+                        "fixmlTypeName": "HopRefID_t",
+                        "description": "Reference identifier assigned by HopCompID (628) associated with the message sent. It is recommended that this value be the MsgSeqNum (34) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      }
+                    },
+                    "fixmlComponent": "Hop"
+                  },
+                  "fixmlRepeating": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "x-fixml-metadata": {
+    "messageType": "CnfmReq",
+    "generatedAt": "2025-09-03T12:08:40.218Z",
+    "generator": "FIXML to JSON Schema Converter"
+  }
+}

@@ -1,0 +1,1100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TstActnReq",
+  "type": "object",
+  "properties": {
+    "ReqID": {
+      "type": "string",
+      "fixmlTypeName": "TestActionRequestID_t",
+      "description": "Unique identifier of the TestActionRequest(35=EN)."
+    },
+    "ActnTyp": {
+      "type": "string",
+      "fixmlTypeName": "TestActionType_t"
+    },
+    "TstSteReqID": {
+      "type": "string",
+      "fixmlTypeName": "TestSuiteRequestID_t",
+      "description": "Unique identifier of the TestSuiteDefinitionRequest(35=EL)."
+    },
+    "TxnTm": {
+      "type": "string",
+      "fixmlTypeName": "TransactTime_t",
+      "description": "Timestamp when the business transaction represented by the message occurred."
+    },
+    "Txt": {
+      "type": "string",
+      "fixmlTypeName": "Text_t",
+      "description": "Free format text string \n                    (Note: this field does not have a specified maximum length)"
+    },
+    "EncTxtLen": {
+      "type": "string",
+      "fixmlTypeName": "EncodedTextLen_t",
+      "description": "Byte length of encoded (non-ASCII characters) EncodedText (355) field."
+    },
+    "EncTxt": {
+      "type": "string",
+      "format": "base64",
+      "fixmlTypeName": "EncodedText_t",
+      "description": "Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field. If used, the ASCII (English) representation should also be specified in the Text(58) field."
+    },
+    "Pty": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "fixmlTypeName": "PartyID_t",
+            "description": "Party identifier/code. See PartyIDSource (447) and PartyRole (452). \n                    See \"Appendix 6-G - Use of <Parties> Component Block\""
+          },
+          "Src": {
+            "type": "string",
+            "fixmlTypeName": "PartyIDSource_t"
+          },
+          "R": {
+            "type": "string",
+            "fixmlTypeName": "PartyRole_t"
+          },
+          "Qual": {
+            "type": "string",
+            "fixmlTypeName": "PartyRoleQualifier_t"
+          },
+          "Sub": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ID": {
+                  "type": "string",
+                  "fixmlTypeName": "PartySubID_t",
+                  "description": "Sub-identifier (e.g. Clearing Account for PartyRole (452)=Clearing Firm, Locate ID # for PartyRole=Locate/Lending Firm, etc). Not required when using PartyID (448), PartyIDSource (447), and PartyRole."
+                },
+                "Typ": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "fixmlTypeName": "PartySubIDType_enum_t",
+                      "enum": [
+                        "Firm",
+                        "Person",
+                        "System",
+                        "Application",
+                        "Full legal name of firm",
+                        "Postal address",
+                        "Phone number",
+                        "Email address",
+                        "Contact name",
+                        "Securities account number (for settlement instructions)",
+                        "Registration number (for settlement instructions and confirmations)",
+                        "Registered address (for confirmation purposes)",
+                        "Regulatory status (for confirmation purposes)",
+                        "Registration name (for settlement instructions)",
+                        "Cash account number (for settlement instructions)",
+                        "BIC",
+                        "CSD participant member code",
+                        "Registered address",
+                        "Fund account name",
+                        "Telex number",
+                        "Fax number",
+                        "Securities account name",
+                        "Cash account name",
+                        "Department",
+                        "Location desk",
+                        "Position account type",
+                        "Security locate ID",
+                        "Market maker",
+                        "Eligible counterparty",
+                        "Professional client",
+                        "Location",
+                        "Execution venue",
+                        "Currency delivery identifier",
+                        "Address City",
+                        "Address State/Province",
+                        "Address Postal Code",
+                        "Address Street",
+                        "Address Country (ISO country code)",
+                        "ISO country code",
+                        "Market segment",
+                        "Customer account type",
+                        "Omnibus account",
+                        "Funds segregation type",
+                        "Guarantee fund",
+                        "Swap dealer",
+                        "Major participant",
+                        "Financial entity",
+                        "U.S. person",
+                        "Reporting entity indicator",
+                        "Elected clearing requirement exception",
+                        "Business center",
+                        "Reference text",
+                        "Short-marking exempt account",
+                        "Parent firm identifier",
+                        "Parent firm name",
+                        "Deal identifier",
+                        "System trade identifier",
+                        "System trade sub-identifier",
+                        "Futures Commission Merchant (FCM) code",
+                        "Delivery terminal customer account/code",
+                        "Voluntary reporting entity",
+                        "Reporting obligation jurisdiction",
+                        "Voluntary reporting jurisdiction",
+                        "Company activities",
+                        "European Economic Area domiciled",
+                        "Contract linked to commercial or treasury financing for this counterparty",
+                        "Contract above clearing threshold for this counterparty",
+                        "Voluntary reporting party",
+                        "End user",
+                        "Location or jurisdiction",
+                        "Derivatives dealer",
+                        "Domicile",
+                        "Exempt from recognition",
+                        "Payer",
+                        "Receiver",
+                        "Systematic Internaliser (SI)",
+                        "Publishing entity indicator",
+                        "First name",
+                        "Surname",
+                        "Date of birth",
+                        "Order transmitting firm",
+                        "Order transmitting firm for buyer",
+                        "Order transmitter for seller",
+                        "Legal Entity Identifier (ISO 17442) LEI",
+                        "Sub-sector classification",
+                        "Party side",
+                        "Legal registration country"
+                      ],
+                      "enumKey": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "20",
+                        "21",
+                        "22",
+                        "23",
+                        "24",
+                        "25",
+                        "26",
+                        "27",
+                        "28",
+                        "29",
+                        "30",
+                        "31",
+                        "32",
+                        "33",
+                        "34",
+                        "35",
+                        "36",
+                        "37",
+                        "38",
+                        "39",
+                        "40",
+                        "41",
+                        "42",
+                        "43",
+                        "44",
+                        "45",
+                        "46",
+                        "47",
+                        "48",
+                        "49",
+                        "50",
+                        "51",
+                        "52",
+                        "53",
+                        "54",
+                        "55",
+                        "56",
+                        "57",
+                        "58",
+                        "59",
+                        "60",
+                        "61",
+                        "62",
+                        "63",
+                        "64",
+                        "65",
+                        "66",
+                        "67",
+                        "68",
+                        "69",
+                        "70",
+                        "71",
+                        "72",
+                        "73",
+                        "74",
+                        "75",
+                        "76",
+                        "77",
+                        "78",
+                        "79",
+                        "80",
+                        "81",
+                        "82",
+                        "83",
+                        "84",
+                        "85",
+                        "86",
+                        "87"
+                      ],
+                      "description": "Type of PartySubID(523) value."
+                    },
+                    {
+                      "type": "integer",
+                      "fixmlTypeName": "Reserved4000Plus",
+                      "minimum": 4000,
+                      "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                    }
+                  ]
+                }
+              },
+              "fixmlComponent": "Sub"
+            },
+            "fixmlRepeating": true
+          }
+        },
+        "fixmlComponent": "Pty"
+      },
+      "fixmlRepeating": true
+    },
+    "TstScnro": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "fixmlTypeName": "TestScenarioID_t",
+            "description": "Unique identifier of a test scenario for a software system."
+          },
+          "Stat": {
+            "type": "string",
+            "fixmlTypeName": "TestScenarioStatus_t"
+          },
+          "StartTm": {
+            "type": "string",
+            "fixmlTypeName": "TestScenarioStartTime_t",
+            "description": "Starting date and time of test scenario execution for a software system."
+          },
+          "EndTm": {
+            "type": "string",
+            "fixmlTypeName": "TestScenarioEndTime_t",
+            "description": "Ending date and time of test scenario execution for a software system."
+          },
+          "MDOrigTyp": {
+            "type": "string",
+            "fixmlTypeName": "MDOriginType_t"
+          },
+          "MDOrigDesc": {
+            "type": "string",
+            "fixmlTypeName": "MDOriginDesc_t",
+            "description": "Description of the origin of the market data."
+          },
+          "MDOrigTm": {
+            "type": "string",
+            "fixmlTypeName": "MDOriginTime_t",
+            "description": "Date and time of the market data."
+          },
+          "TstStepGrpID": {
+            "type": "string",
+            "fixmlTypeName": "TestStepGroupID_t",
+            "description": "Unique identifier for the group of test steps constituting a test scenario."
+          },
+          "Pty": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ID": {
+                  "type": "string",
+                  "fixmlTypeName": "NestedPartyID_t",
+                  "description": "PartyID value within a nested repeating group. \n                    Same values as PartyID (448)"
+                },
+                "Src": {
+                  "type": "string",
+                  "fixmlTypeName": "NestedPartyIDSource_t"
+                },
+                "R": {
+                  "type": "string",
+                  "fixmlTypeName": "NestedPartyRole_t"
+                },
+                "Qual": {
+                  "type": "string",
+                  "fixmlTypeName": "NestedPartyRoleQualifier_t"
+                },
+                "Sub": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "NestedPartySubID_t",
+                        "description": "PartySubID value within a nested repeating group. \n                    Same values as PartySubID (523)"
+                      },
+                      "Typ": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "fixmlTypeName": "PartySubIDType_enum_t",
+                            "enum": [
+                              "Firm",
+                              "Person",
+                              "System",
+                              "Application",
+                              "Full legal name of firm",
+                              "Postal address",
+                              "Phone number",
+                              "Email address",
+                              "Contact name",
+                              "Securities account number (for settlement instructions)",
+                              "Registration number (for settlement instructions and confirmations)",
+                              "Registered address (for confirmation purposes)",
+                              "Regulatory status (for confirmation purposes)",
+                              "Registration name (for settlement instructions)",
+                              "Cash account number (for settlement instructions)",
+                              "BIC",
+                              "CSD participant member code",
+                              "Registered address",
+                              "Fund account name",
+                              "Telex number",
+                              "Fax number",
+                              "Securities account name",
+                              "Cash account name",
+                              "Department",
+                              "Location desk",
+                              "Position account type",
+                              "Security locate ID",
+                              "Market maker",
+                              "Eligible counterparty",
+                              "Professional client",
+                              "Location",
+                              "Execution venue",
+                              "Currency delivery identifier",
+                              "Address City",
+                              "Address State/Province",
+                              "Address Postal Code",
+                              "Address Street",
+                              "Address Country (ISO country code)",
+                              "ISO country code",
+                              "Market segment",
+                              "Customer account type",
+                              "Omnibus account",
+                              "Funds segregation type",
+                              "Guarantee fund",
+                              "Swap dealer",
+                              "Major participant",
+                              "Financial entity",
+                              "U.S. person",
+                              "Reporting entity indicator",
+                              "Elected clearing requirement exception",
+                              "Business center",
+                              "Reference text",
+                              "Short-marking exempt account",
+                              "Parent firm identifier",
+                              "Parent firm name",
+                              "Deal identifier",
+                              "System trade identifier",
+                              "System trade sub-identifier",
+                              "Futures Commission Merchant (FCM) code",
+                              "Delivery terminal customer account/code",
+                              "Voluntary reporting entity",
+                              "Reporting obligation jurisdiction",
+                              "Voluntary reporting jurisdiction",
+                              "Company activities",
+                              "European Economic Area domiciled",
+                              "Contract linked to commercial or treasury financing for this counterparty",
+                              "Contract above clearing threshold for this counterparty",
+                              "Voluntary reporting party",
+                              "End user",
+                              "Location or jurisdiction",
+                              "Derivatives dealer",
+                              "Domicile",
+                              "Exempt from recognition",
+                              "Payer",
+                              "Receiver",
+                              "Systematic Internaliser (SI)",
+                              "Publishing entity indicator",
+                              "First name",
+                              "Surname",
+                              "Date of birth",
+                              "Order transmitting firm",
+                              "Order transmitting firm for buyer",
+                              "Order transmitter for seller",
+                              "Legal Entity Identifier (ISO 17442) LEI",
+                              "Sub-sector classification",
+                              "Party side",
+                              "Legal registration country"
+                            ],
+                            "enumKey": [
+                              "1",
+                              "2",
+                              "3",
+                              "4",
+                              "5",
+                              "6",
+                              "7",
+                              "8",
+                              "9",
+                              "10",
+                              "11",
+                              "12",
+                              "13",
+                              "14",
+                              "15",
+                              "16",
+                              "17",
+                              "18",
+                              "19",
+                              "20",
+                              "21",
+                              "22",
+                              "23",
+                              "24",
+                              "25",
+                              "26",
+                              "27",
+                              "28",
+                              "29",
+                              "30",
+                              "31",
+                              "32",
+                              "33",
+                              "34",
+                              "35",
+                              "36",
+                              "37",
+                              "38",
+                              "39",
+                              "40",
+                              "41",
+                              "42",
+                              "43",
+                              "44",
+                              "45",
+                              "46",
+                              "47",
+                              "48",
+                              "49",
+                              "50",
+                              "51",
+                              "52",
+                              "53",
+                              "54",
+                              "55",
+                              "56",
+                              "57",
+                              "58",
+                              "59",
+                              "60",
+                              "61",
+                              "62",
+                              "63",
+                              "64",
+                              "65",
+                              "66",
+                              "67",
+                              "68",
+                              "69",
+                              "70",
+                              "71",
+                              "72",
+                              "73",
+                              "74",
+                              "75",
+                              "76",
+                              "77",
+                              "78",
+                              "79",
+                              "80",
+                              "81",
+                              "82",
+                              "83",
+                              "84",
+                              "85",
+                              "86",
+                              "87"
+                            ],
+                            "description": "Type of PartySubID(523) value."
+                          },
+                          {
+                            "type": "integer",
+                            "fixmlTypeName": "Reserved4000Plus",
+                            "minimum": 4000,
+                            "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                          }
+                        ]
+                      }
+                    },
+                    "fixmlComponent": "Sub"
+                  },
+                  "fixmlRepeating": true
+                }
+              },
+              "fixmlComponent": "Pty"
+            },
+            "fixmlRepeating": true
+          },
+          "InstrmtScope": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Oper": {
+                  "type": "string",
+                  "fixmlTypeName": "InstrumentScopeOperator_t"
+                },
+                "AID": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "AltID": {
+                        "type": "string",
+                        "fixmlTypeName": "InstrumentScopeSecurityAltID_t",
+                        "description": "Used to limit instrument scope to specified security alternate identifier. \n                    See SecurityAltID(455) field for description."
+                      },
+                      "AltIDSrc": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "fixmlTypeName": "SecurityIDSource_enum_t",
+                            "enum": [
+                              "CUSIP",
+                              "SEDOL",
+                              "QUIK",
+                              "ISIN",
+                              "RIC",
+                              "ISO Currency Code (ISO 4217)",
+                              "ISO Country Code",
+                              "Exchange symbol",
+                              "Consolidated Tape Association (CTA) Symbol (SIAC CTS/CQS line format)",
+                              "Bloomberg Symbol",
+                              "Wertpapier",
+                              "Dutch",
+                              "Valoren",
+                              "Sicovam",
+                              "Belgian",
+                              "\"Common\" (Clearstream and Euroclear)",
+                              "Clearing house / Clearing organization",
+                              "ISDA/FpML product specification (XML in SecurityXML(1185))",
+                              "Option Price Reporting Authority",
+                              "ISDA/FpML product URL (URL in SecurityID(48))",
+                              "Letter of credit",
+                              "Marketplace-assigned Identifier",
+                              "Markit RED entity CLIP",
+                              "Markit RED pair CLIP",
+                              "CFTC commodity code",
+                              "ISDA Commodity Reference Price",
+                              "Financial Instrument Global Identifier",
+                              "Legal entity identifier",
+                              "Synthetic",
+                              "Fidessa Instrument Mnemonic (FIM)",
+                              "Index name",
+                              "Uniform Symbol (UMTF Symbol)",
+                              "Digital Token Identifier (ISO 24165)"
+                            ],
+                            "enumKey": [
+                              "1",
+                              "2",
+                              "3",
+                              "4",
+                              "5",
+                              "6",
+                              "7",
+                              "8",
+                              "9",
+                              "A",
+                              "B",
+                              "C",
+                              "D",
+                              "E",
+                              "F",
+                              "G",
+                              "H",
+                              "I",
+                              "J",
+                              "K",
+                              "L",
+                              "M",
+                              "N",
+                              "P",
+                              "Q",
+                              "R",
+                              "S",
+                              "T",
+                              "U",
+                              "V",
+                              "W",
+                              "X",
+                              "Y"
+                            ],
+                            "description": "Identifies class or source of the SecurityID(48) value."
+                          },
+                          {
+                            "type": "integer",
+                            "fixmlTypeName": "Reserved100Plus",
+                            "minimum": 100,
+                            "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                          }
+                        ]
+                      }
+                    },
+                    "fixmlComponent": "AID"
+                  },
+                  "fixmlRepeating": true
+                }
+              },
+              "fixmlComponent": "InstrmtScope"
+            },
+            "fixmlRepeating": true
+          },
+          "TstStep": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ID": {
+                  "type": "string",
+                  "fixmlTypeName": "TestStepID_t",
+                  "description": "Unique identifier of a test step."
+                },
+                "Desc": {
+                  "type": "string",
+                  "fixmlTypeName": "TestStepDesc_t",
+                  "description": "Description of a test step."
+                },
+                "StartTm": {
+                  "type": "string",
+                  "fixmlTypeName": "TestStepStartTime_t",
+                  "description": "Starting time of a test step."
+                },
+                "StartOfstPeriod": {
+                  "type": "integer",
+                  "fixmlTypeName": "TestStepStartOffsetPeriod_t",
+                  "description": "Time unit multiplier for the starting time of a test step relative to the starting time of a test scenario."
+                },
+                "StartOfstUnit": {
+                  "type": "string",
+                  "fixmlTypeName": "TestStepStartOffsetUnit_t"
+                },
+                "EndTm": {
+                  "type": "string",
+                  "fixmlTypeName": "TestStepEndTime_t",
+                  "description": "Ending time of a test step."
+                },
+                "EndOfstPeriod": {
+                  "type": "integer",
+                  "fixmlTypeName": "TestStepEndOffsetPeriod_t",
+                  "description": "Time unit multiplier for the ending time of a test step relative to the starting time of a test scenario."
+                },
+                "EndOfstUnit": {
+                  "type": "string",
+                  "fixmlTypeName": "TestStepEndOffsetUnit_t"
+                },
+                "TstStepPrm": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "PrmName": {
+                        "type": "string",
+                        "fixmlTypeName": "TestStepParameterName_t",
+                        "description": "Name of the test step parameter."
+                      },
+                      "PrmTyp": {
+                        "type": "string",
+                        "fixmlTypeName": "TestStepParameterType_t"
+                      },
+                      "PrmVal": {
+                        "type": "string",
+                        "fixmlTypeName": "TestStepParameterValue_t",
+                        "description": "Value of the test step parameter."
+                      }
+                    },
+                    "fixmlComponent": "TstStepPrm"
+                  },
+                  "fixmlRepeating": true
+                }
+              },
+              "fixmlComponent": "TstStep"
+            },
+            "fixmlRepeating": true
+          },
+          "TstSysModl": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "type": "string",
+                  "fixmlTypeName": "TestSystemModuleName_t",
+                  "description": "Name of the component of a testing system."
+                },
+                "Ver": {
+                  "type": "string",
+                  "fixmlTypeName": "TestSystemModuleVersion_t",
+                  "description": "Version (e.g. build or commit number) of the component of a testing system."
+                },
+                "LastUpdateTm": {
+                  "type": "string",
+                  "fixmlTypeName": "TestSystemModuleLastUpdateTime_t",
+                  "description": "Support Timestamp of last update to Algo Test System Module."
+                }
+              },
+              "fixmlComponent": "TstSysModl"
+            },
+            "fixmlRepeating": true
+          },
+          "TstMsr": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "type": "string",
+                  "fixmlTypeName": "TestMeasureName_t",
+                  "description": "Name of a test measure."
+                },
+                "Desc": {
+                  "type": "string",
+                  "fixmlTypeName": "TestMeasureDesc_t",
+                  "description": "Description of a test measure."
+                },
+                "Typ": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "fixmlTypeName": "StrategyParameterType_enum_t",
+                      "enum": [
+                        "Int",
+                        "Length",
+                        "NumInGroup",
+                        "SeqNum",
+                        "TagNum",
+                        "float",
+                        "Qty",
+                        "Price",
+                        "PriceOffset",
+                        "Amt",
+                        "Percentage",
+                        "Char",
+                        "Boolean",
+                        "String",
+                        "MultipleCharValue",
+                        "Currency",
+                        "Exchange",
+                        "MonthYear",
+                        "UTCTimestamp",
+                        "UTCTimeOnly",
+                        "LocalMktDate",
+                        "UTCDateOnly",
+                        "data",
+                        "MultipleStringValue",
+                        "Country",
+                        "Language",
+                        "TZTimeOnly",
+                        "TZTimestamp",
+                        "Tenor"
+                      ],
+                      "enumKey": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "20",
+                        "21",
+                        "22",
+                        "23",
+                        "24",
+                        "25",
+                        "26",
+                        "27",
+                        "28",
+                        "29"
+                      ],
+                      "description": "Datatype of the parameter"
+                    },
+                    {
+                      "type": "integer",
+                      "fixmlTypeName": "Reserved100Plus",
+                      "minimum": 100,
+                      "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                    }
+                  ]
+                },
+                "Prcsn": {
+                  "type": "integer",
+                  "fixmlTypeName": "TestMeasurePrecision_t",
+                  "description": "Number of decimal places for TestMeasureType(3055)."
+                },
+                "Rslt": {
+                  "type": "string",
+                  "fixmlTypeName": "TestMeasureResult_t"
+                },
+                "ThresholdTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "TestThresholdType_t"
+                },
+                "WarnLvlVal": {
+                  "type": "number",
+                  "fixmlTypeName": "TestWarningLevelValue_t",
+                  "description": "Value of the measure upon which a warning is issued for the test."
+                },
+                "FailLvlVal": {
+                  "type": "number",
+                  "fixmlTypeName": "TestFailLevelValue_t",
+                  "description": "Value of the measure upon which the test is considered to have failed."
+                },
+                "PeakLvlVal": {
+                  "type": "number",
+                  "fixmlTypeName": "TestPeakLevelValue_t",
+                  "description": "Peak value of the measure achieved in testing."
+                }
+              },
+              "fixmlComponent": "TstMsr"
+            },
+            "fixmlRepeating": true
+          },
+          "TstOrd": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ID": {
+                  "type": "string",
+                  "fixmlTypeName": "TestOrderID_t",
+                  "description": "Identifier of a test order."
+                },
+                "Sym": {
+                  "type": "string",
+                  "fixmlTypeName": "TestOrderSymbol_t",
+                  "description": "Used for the security symbol of a test order. \n                    See Symbol(55) field for description."
+                },
+                "SecID": {
+                  "type": "string",
+                  "fixmlTypeName": "TestOrderSecurityID_t",
+                  "description": "Used for the security identifier of a test order. \n                    See Security(48) field for description."
+                },
+                "SecIDSrc": {
+                  "type": "string",
+                  "fixmlTypeName": "TestOrderSecurityIDSource_t",
+                  "description": "Used for the source of the security identifier of a test order. \n                    See SecurityIDSource(22) field for description."
+                },
+                "Px": {
+                  "type": "string",
+                  "fixmlTypeName": "TestOrderPrice_t",
+                  "description": "Used for the price of a test order. \n                    See Price(44) field for description."
+                },
+                "PxTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "TestOrderPriceType_t"
+                },
+                "Qty": {
+                  "type": "string",
+                  "fixmlTypeName": "TestOrderQty_t",
+                  "description": "Used for the quantity of a test order. \n                    See OrderQty(80) field for description."
+                },
+                "OfstPeriod": {
+                  "type": "integer",
+                  "fixmlTypeName": "TestOrderOffsetPeriod_t",
+                  "description": "Time unit multiplier for the effective time of an order relative to the starting time of a test scenario."
+                },
+                "OfstUnit": {
+                  "type": "string",
+                  "fixmlTypeName": "TestOrderOffsetUnit_t"
+                }
+              },
+              "fixmlComponent": "TstOrd"
+            },
+            "fixmlRepeating": true
+          }
+        },
+        "fixmlComponent": "TstScnro"
+      },
+      "fixmlRepeating": true
+    }
+  },
+  "required": [
+    "ReqID",
+    "ActnTyp",
+    "TstSteReqID",
+    "TxnTm"
+  ],
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "Hdr": {
+          "type": "object",
+          "properties": {},
+          "fixmlComponent": "Hdr",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "MsgTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgType_t"
+                },
+                "ApplVerID": {
+                  "type": "string",
+                  "fixmlTypeName": "ApplVerID_t"
+                },
+                "SID": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderCompID_t",
+                  "description": "Assigned value used to identify firm sending message."
+                },
+                "TID": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetCompID_t",
+                  "description": "Assigned value used to identify receiving firm."
+                },
+                "OBID": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfCompID_t",
+                  "description": "Assigned value used to identify firm originating message if the message was delivered by a third party i.e. the third party firm identifier would be delivered in the SenderCompID field and the firm originating the message in this field."
+                },
+                "D2ID": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToCompID_t",
+                  "description": "Assigned value used to identify the firm targeted to receive the message if the message is delivered by a third party i.e. the third party firm identifier would be delivered in the TargetCompID (56) field and the ultimate receiver firm ID in this field."
+                },
+                "SeqNum": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgSeqNum_t",
+                  "description": "Integer message sequence number."
+                },
+                "SSub": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderSubID_t",
+                  "description": "Assigned value used to identify specific message originator (desk, trader, etc.)"
+                },
+                "SLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader)"
+                },
+                "TSub": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetSubID_t",
+                  "description": "Assigned value used to identify specific individual or unit intended to receive message. \"ADMIN\" reserved for administrative messages not intended for a specific user."
+                },
+                "TLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetLocationID_t",
+                  "description": "Assigned value used to identify specific message destination's location (i.e. geographic location and/or desk, trader)"
+                },
+                "OBSub": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfSubID_t",
+                  "description": "Assigned value used to identify specific message originator (i.e. trader) if the message was delivered by a third party"
+                },
+                "OBLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "D2Sub": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToSubID_t",
+                  "description": "Assigned value used to identify specific message recipient (i.e. trader) if the message is delivered by a third party"
+                },
+                "D2Loc": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToLocationID_t",
+                  "description": "Assigned value used to identify specific message recipient's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "PosDup": {
+                  "type": "string",
+                  "fixmlTypeName": "PossDupFlag_t"
+                },
+                "PosRsnd": {
+                  "type": "string",
+                  "fixmlTypeName": "PossResend_t"
+                },
+                "Snt": {
+                  "type": "string",
+                  "fixmlTypeName": "SendingTime_t",
+                  "description": "Time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\")"
+                },
+                "OrigSnt": {
+                  "type": "string",
+                  "fixmlTypeName": "OrigSendingTime_t",
+                  "description": "Original time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\") when transmitting orders as the result of a resend request."
+                },
+                "MsgEncd": {
+                  "type": "string",
+                  "fixmlTypeName": "MessageEncoding_t",
+                  "description": "Type of message encoding (non-ASCII (non-English) characters) used in a message's \"Encoded\" fields."
+                },
+                "Hop": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "HopCompID_t",
+                        "description": "Assigned value used to identify the third party firm which delivered a specific message either from the firm which originated the message or from another third party (if multiple \"hops\" are performed). It is recommended that this value be the SenderCompID (49) of the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Snt": {
+                        "type": "string",
+                        "fixmlTypeName": "HopSendingTime_t",
+                        "description": "Time that HopCompID (628) sent the message. It is recommended that this value be the SendingTime (52) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Ref": {
+                        "type": "string",
+                        "fixmlTypeName": "HopRefID_t",
+                        "description": "Reference identifier assigned by HopCompID (628) associated with the message sent. It is recommended that this value be the MsgSeqNum (34) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      }
+                    },
+                    "fixmlComponent": "Hop"
+                  },
+                  "fixmlRepeating": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "x-fixml-metadata": {
+    "messageType": "TstActnReq",
+    "generatedAt": "2025-09-03T12:08:40.658Z",
+    "generator": "FIXML to JSON Schema Converter"
+  }
+}

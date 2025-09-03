@@ -1,0 +1,185 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AlgoCertRptAck",
+  "type": "object",
+  "properties": {
+    "CertRptID": {
+      "type": "string",
+      "fixmlTypeName": "AlgoCertificateReportID_t",
+      "description": "Unique identifier of the AlgoCertificateReport(35=EJ)."
+    },
+    "RptStat": {
+      "type": "string",
+      "fixmlTypeName": "AlgoCertificateReportStatus_t"
+    },
+    "RptTyp": {
+      "type": "string",
+      "fixmlTypeName": "AlgoCertificateReportType_t"
+    },
+    "RejTxt": {
+      "type": "string",
+      "fixmlTypeName": "RejectText_t",
+      "description": "Identifies the reason for rejection."
+    },
+    "EncRejTxtLen": {
+      "type": "string",
+      "fixmlTypeName": "EncodedRejectTextLen_t",
+      "description": "Byte length of encoded (non-ASCII characters) EncodedRejectText(1665) field."
+    },
+    "EncRejTxt": {
+      "type": "string",
+      "format": "base64",
+      "fixmlTypeName": "EncodedRejectText_t",
+      "description": "Encoded (non-ASCII characters) representation of the RejectText(1328) field in the encoded format specified via the MessageEncoding(347) field. If used, the ASCII (English) representation should also be specified in the RejectText(1328) field."
+    }
+  },
+  "required": [
+    "CertRptID",
+    "RptStat"
+  ],
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "Hdr": {
+          "type": "object",
+          "properties": {},
+          "fixmlComponent": "Hdr",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "MsgTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgType_t"
+                },
+                "ApplVerID": {
+                  "type": "string",
+                  "fixmlTypeName": "ApplVerID_t"
+                },
+                "SID": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderCompID_t",
+                  "description": "Assigned value used to identify firm sending message."
+                },
+                "TID": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetCompID_t",
+                  "description": "Assigned value used to identify receiving firm."
+                },
+                "OBID": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfCompID_t",
+                  "description": "Assigned value used to identify firm originating message if the message was delivered by a third party i.e. the third party firm identifier would be delivered in the SenderCompID field and the firm originating the message in this field."
+                },
+                "D2ID": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToCompID_t",
+                  "description": "Assigned value used to identify the firm targeted to receive the message if the message is delivered by a third party i.e. the third party firm identifier would be delivered in the TargetCompID (56) field and the ultimate receiver firm ID in this field."
+                },
+                "SeqNum": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgSeqNum_t",
+                  "description": "Integer message sequence number."
+                },
+                "SSub": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderSubID_t",
+                  "description": "Assigned value used to identify specific message originator (desk, trader, etc.)"
+                },
+                "SLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader)"
+                },
+                "TSub": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetSubID_t",
+                  "description": "Assigned value used to identify specific individual or unit intended to receive message. \"ADMIN\" reserved for administrative messages not intended for a specific user."
+                },
+                "TLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetLocationID_t",
+                  "description": "Assigned value used to identify specific message destination's location (i.e. geographic location and/or desk, trader)"
+                },
+                "OBSub": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfSubID_t",
+                  "description": "Assigned value used to identify specific message originator (i.e. trader) if the message was delivered by a third party"
+                },
+                "OBLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "D2Sub": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToSubID_t",
+                  "description": "Assigned value used to identify specific message recipient (i.e. trader) if the message is delivered by a third party"
+                },
+                "D2Loc": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToLocationID_t",
+                  "description": "Assigned value used to identify specific message recipient's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "PosDup": {
+                  "type": "string",
+                  "fixmlTypeName": "PossDupFlag_t"
+                },
+                "PosRsnd": {
+                  "type": "string",
+                  "fixmlTypeName": "PossResend_t"
+                },
+                "Snt": {
+                  "type": "string",
+                  "fixmlTypeName": "SendingTime_t",
+                  "description": "Time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\")"
+                },
+                "OrigSnt": {
+                  "type": "string",
+                  "fixmlTypeName": "OrigSendingTime_t",
+                  "description": "Original time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\") when transmitting orders as the result of a resend request."
+                },
+                "MsgEncd": {
+                  "type": "string",
+                  "fixmlTypeName": "MessageEncoding_t",
+                  "description": "Type of message encoding (non-ASCII (non-English) characters) used in a message's \"Encoded\" fields."
+                },
+                "Hop": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "HopCompID_t",
+                        "description": "Assigned value used to identify the third party firm which delivered a specific message either from the firm which originated the message or from another third party (if multiple \"hops\" are performed). It is recommended that this value be the SenderCompID (49) of the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Snt": {
+                        "type": "string",
+                        "fixmlTypeName": "HopSendingTime_t",
+                        "description": "Time that HopCompID (628) sent the message. It is recommended that this value be the SendingTime (52) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Ref": {
+                        "type": "string",
+                        "fixmlTypeName": "HopRefID_t",
+                        "description": "Reference identifier assigned by HopCompID (628) associated with the message sent. It is recommended that this value be the MsgSeqNum (34) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      }
+                    },
+                    "fixmlComponent": "Hop"
+                  },
+                  "fixmlRepeating": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "x-fixml-metadata": {
+    "messageType": "AlgoCertRptAck",
+    "generatedAt": "2025-09-03T12:08:40.657Z",
+    "generator": "FIXML to JSON Schema Converter"
+  }
+}

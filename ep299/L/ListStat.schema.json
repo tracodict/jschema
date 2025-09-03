@@ -1,0 +1,440 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ListStat",
+  "type": "object",
+  "properties": {
+    "ID": {
+      "type": "string",
+      "fixmlTypeName": "ListID_t",
+      "description": "Unique identifier for list as assigned by institution, used to associate multiple individual orders. Uniqueness must be guaranteed within a single trading day. Firms which generate multi-day orders should consider embedding a date within the ListID field to assure uniqueness across days."
+    },
+    "ListStatTyp": {
+      "type": "string",
+      "fixmlTypeName": "ListStatusType_t"
+    },
+    "NoRpts": {
+      "type": "integer",
+      "fixmlTypeName": "NoRpts_t",
+      "description": "Total number of reports within series."
+    },
+    "ListOrdStat": {
+      "type": "string",
+      "fixmlTypeName": "ListOrderStatus_t"
+    },
+    "ContingencyType": {
+      "anyOf": [
+        {
+          "type": "string",
+          "fixmlTypeName": "ContingencyType_enum_t",
+          "enum": [
+            "One Cancels the Other (OCO)",
+            "One Triggers the Other (OTO)",
+            "One Updates the Other (OUO) - Absolute Quantity Reduction",
+            "One Updates the Other (OUO) - Proportional Quantity Reduction",
+            "Bid and Offer",
+            "Bid and Offer OCO"
+          ],
+          "enumKey": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "description": "Defines the type of contingency."
+        },
+        {
+          "type": "integer",
+          "fixmlTypeName": "Reserved100Plus",
+          "minimum": 100,
+          "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+        }
+      ]
+    },
+    "ListRejectReason": {
+      "anyOf": [
+        {
+          "type": "string",
+          "fixmlTypeName": "ListRejectReason_enum_t",
+          "enum": [
+            "Broker / Exchange option",
+            "Exchange closed",
+            "Too late to enter",
+            "Unknown order",
+            "Duplicate Order (e.g. dupe ClOrdID)",
+            "Unsupported order characteristic",
+            "Other"
+          ],
+          "enumKey": [
+            "0",
+            "2",
+            "4",
+            "5",
+            "6",
+            "11",
+            "99"
+          ],
+          "description": "Identifies the reason for rejection of a New Order List message. Note that OrdRejReason(103) is used if the rejection is based on properties of an individual order part of the List."
+        },
+        {
+          "type": "integer",
+          "fixmlTypeName": "Reserved100Plus",
+          "minimum": 100,
+          "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+        }
+      ]
+    },
+    "RptSeq": {
+      "type": "integer",
+      "fixmlTypeName": "RptSeq_t",
+      "description": "Sequence number of message within report series. Used to carry reporting sequence number of the fill as represented on the Trade Report Side."
+    },
+    "ListStatText": {
+      "type": "string",
+      "fixmlTypeName": "ListStatusText_t",
+      "description": "Free format text string related to List Status."
+    },
+    "EncListStatTextLen": {
+      "type": "string",
+      "fixmlTypeName": "EncodedListStatusTextLen_t",
+      "description": "Byte length of encoded (non-ASCII characters) EncodedListStatusText (446) field."
+    },
+    "EncListStatText": {
+      "type": "string",
+      "format": "base64",
+      "fixmlTypeName": "EncodedListStatusText_t",
+      "description": "Encoded (non-ASCII characters) representation of the ListStatusText (444) field in the encoded format specified via the MessageEncoding (347) field. If used, the ASCII (English) representation should also be specified in the ListStatusText field."
+    },
+    "TxnTm": {
+      "type": "string",
+      "fixmlTypeName": "TransactTime_t",
+      "description": "Timestamp when the business transaction represented by the message occurred."
+    },
+    "TotNoOrds": {
+      "type": "integer",
+      "fixmlTypeName": "TotNoOrders_t",
+      "description": "Total number of list order entries across all messages. Should be the sum of all NoOrders (73) in each message that has repeating list order entries related to the same ListID (66). Used to support fragmentation. \n                    (Prior to FIX 4.2 this field was named \"ListNoOrds\")"
+    },
+    "LastFragment": {
+      "type": "string",
+      "fixmlTypeName": "LastFragment_t"
+    },
+    "ListStat": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ClOrdID": {
+            "type": "string",
+            "fixmlTypeName": "ClOrdID_t",
+            "description": "Unique identifier for Order as assigned by the buy-side (institution, broker, intermediary etc.) (identified by SenderCompID(49) or OnBehalfOfCompID(115) as appropriate). Uniqueness must be guaranteed within a single trading day. Firms, particularly those which electronically submit multi-day orders, trade globally or throughout market close periods, should ensure uniqueness across days, for example by embedding a date within the ClOrdID(11) field."
+          },
+          "OrdID": {
+            "type": "string",
+            "fixmlTypeName": "OrderID_t",
+            "description": "Unique identifier for Order as assigned by sell-side (broker, exchange, ECN). Uniqueness must be guaranteed within a single trading day. Firms which accept multi-day orders should consider embedding a date within the OrderID field to assure uniqueness across days."
+          },
+          "ClOrdID2": {
+            "type": "string",
+            "fixmlTypeName": "SecondaryClOrdID_t",
+            "description": "Assigned by the party which originates the order. Can be used to provide the ClOrdID (11) used by an exchange or executing system."
+          },
+          "CumQty": {
+            "type": "string",
+            "fixmlTypeName": "CumQty_t",
+            "description": "Total quantity (e.g. number of shares) filled. \n                    (Prior to FIX 4.2 this field was of type int)"
+          },
+          "OrdStat": {
+            "type": "string",
+            "fixmlTypeName": "OrdStatus_t"
+          },
+          "WorkingInd": {
+            "type": "string",
+            "fixmlTypeName": "WorkingIndicator_t"
+          },
+          "LeavesQty": {
+            "type": "string",
+            "fixmlTypeName": "LeavesQty_t",
+            "description": "Quantity open for further execution. If the OrdStatus (39) is Canceled, DoneForTheDay, Expired, Calculated, or Rejected (in which case the order is no longer active) then LeavesQty could be 0, otherwise LeavesQty = OrderQty (38) - CumQty (14). \n                    (Prior to FIX 4.2 this field was of type int)"
+          },
+          "CxlQty": {
+            "type": "string",
+            "fixmlTypeName": "CxlQty_t",
+            "description": "Total quantity canceled for this order. \n                    (Prior to FIX 4.2 this field was of type int)"
+          },
+          "AvgPx": {
+            "type": "string",
+            "fixmlTypeName": "AvgPx_t",
+            "description": "Calculated average price of all fills on this order. \n                    For Fixed Income trades AvgPx is always expressed as percent-of-par, regardless of the PriceType (423) of LastPx (31). I.e., AvgPx will contain an average of percent-of-par values (see LastParPx (669)) for issues traded in Yield, Spread or Discount."
+          },
+          "RejRsn": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "OrdRejReason_enum_t",
+                "enum": [
+                  "Broker / Exchange option",
+                  "Unknown symbol",
+                  "Exchange closed",
+                  "Order exceeds limit",
+                  "Too late to enter",
+                  "Unknown order",
+                  "Duplicate Order (e.g. dupe ClOrdID)",
+                  "Duplicate of a verbally communicated order",
+                  "Stale order",
+                  "Trade along required",
+                  "Invalid Investor ID",
+                  "Unsupported order characteristic",
+                  "Surveillance option",
+                  "Incorrect quantity",
+                  "Incorrect allocated quantity",
+                  "Unknown account(s)",
+                  "Price exceeds current price band",
+                  "Invalid price increment",
+                  "Reference price not available",
+                  "Notional value exceeds threshold",
+                  "Algorithm risk threshold breached",
+                  "Short sell not permitted",
+                  "Short sell rejected due to security pre-borrow restriction",
+                  "Short sell rejected due to account pre-borrow restriction",
+                  "Insufficient credit limit",
+                  "Exceeded clip size limit",
+                  "Exceeded maximum notional order amount",
+                  "Exceeded DV01/PV01 limit",
+                  "Exceeded CS01 limit",
+                  "Last look",
+                  "Last look latency",
+                  "Unavailable price or liquidity",
+                  "Invalid or missing entitlements",
+                  "Other"
+                ],
+                "enumKey": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12",
+                  "13",
+                  "14",
+                  "15",
+                  "16",
+                  "18",
+                  "19",
+                  "20",
+                  "21",
+                  "22",
+                  "23",
+                  "24",
+                  "25",
+                  "26",
+                  "27",
+                  "28",
+                  "29",
+                  "30",
+                  "31",
+                  "32",
+                  "33",
+                  "99"
+                ],
+                "description": "Code to identify reason for order rejection. Note: Values 3, 4, and 5 will be used when rejecting an order due to pre-allocation information errors."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "Txt": {
+            "type": "string",
+            "fixmlTypeName": "Text_t",
+            "description": "Free format text string \n                    (Note: this field does not have a specified maximum length)"
+          },
+          "EncTxtLen": {
+            "type": "string",
+            "fixmlTypeName": "EncodedTextLen_t",
+            "description": "Byte length of encoded (non-ASCII characters) EncodedText (355) field."
+          },
+          "EncTxt": {
+            "type": "string",
+            "format": "base64",
+            "fixmlTypeName": "EncodedText_t",
+            "description": "Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field. If used, the ASCII (English) representation should also be specified in the Text(58) field."
+          }
+        },
+        "fixmlComponent": "ListStat",
+        "required": [
+          "CumQty",
+          "OrdStat",
+          "LeavesQty",
+          "CxlQty",
+          "AvgPx"
+        ]
+      },
+      "fixmlRepeating": true
+    }
+  },
+  "required": [
+    "ID",
+    "ListStatTyp",
+    "NoRpts",
+    "ListOrdStat",
+    "RptSeq",
+    "TotNoOrds"
+  ],
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "Hdr": {
+          "type": "object",
+          "properties": {},
+          "fixmlComponent": "Hdr",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "MsgTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgType_t"
+                },
+                "ApplVerID": {
+                  "type": "string",
+                  "fixmlTypeName": "ApplVerID_t"
+                },
+                "SID": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderCompID_t",
+                  "description": "Assigned value used to identify firm sending message."
+                },
+                "TID": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetCompID_t",
+                  "description": "Assigned value used to identify receiving firm."
+                },
+                "OBID": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfCompID_t",
+                  "description": "Assigned value used to identify firm originating message if the message was delivered by a third party i.e. the third party firm identifier would be delivered in the SenderCompID field and the firm originating the message in this field."
+                },
+                "D2ID": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToCompID_t",
+                  "description": "Assigned value used to identify the firm targeted to receive the message if the message is delivered by a third party i.e. the third party firm identifier would be delivered in the TargetCompID (56) field and the ultimate receiver firm ID in this field."
+                },
+                "SeqNum": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgSeqNum_t",
+                  "description": "Integer message sequence number."
+                },
+                "SSub": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderSubID_t",
+                  "description": "Assigned value used to identify specific message originator (desk, trader, etc.)"
+                },
+                "SLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader)"
+                },
+                "TSub": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetSubID_t",
+                  "description": "Assigned value used to identify specific individual or unit intended to receive message. \"ADMIN\" reserved for administrative messages not intended for a specific user."
+                },
+                "TLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetLocationID_t",
+                  "description": "Assigned value used to identify specific message destination's location (i.e. geographic location and/or desk, trader)"
+                },
+                "OBSub": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfSubID_t",
+                  "description": "Assigned value used to identify specific message originator (i.e. trader) if the message was delivered by a third party"
+                },
+                "OBLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "D2Sub": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToSubID_t",
+                  "description": "Assigned value used to identify specific message recipient (i.e. trader) if the message is delivered by a third party"
+                },
+                "D2Loc": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToLocationID_t",
+                  "description": "Assigned value used to identify specific message recipient's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "PosDup": {
+                  "type": "string",
+                  "fixmlTypeName": "PossDupFlag_t"
+                },
+                "PosRsnd": {
+                  "type": "string",
+                  "fixmlTypeName": "PossResend_t"
+                },
+                "Snt": {
+                  "type": "string",
+                  "fixmlTypeName": "SendingTime_t",
+                  "description": "Time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\")"
+                },
+                "OrigSnt": {
+                  "type": "string",
+                  "fixmlTypeName": "OrigSendingTime_t",
+                  "description": "Original time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\") when transmitting orders as the result of a resend request."
+                },
+                "MsgEncd": {
+                  "type": "string",
+                  "fixmlTypeName": "MessageEncoding_t",
+                  "description": "Type of message encoding (non-ASCII (non-English) characters) used in a message's \"Encoded\" fields."
+                },
+                "Hop": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "HopCompID_t",
+                        "description": "Assigned value used to identify the third party firm which delivered a specific message either from the firm which originated the message or from another third party (if multiple \"hops\" are performed). It is recommended that this value be the SenderCompID (49) of the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Snt": {
+                        "type": "string",
+                        "fixmlTypeName": "HopSendingTime_t",
+                        "description": "Time that HopCompID (628) sent the message. It is recommended that this value be the SendingTime (52) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Ref": {
+                        "type": "string",
+                        "fixmlTypeName": "HopRefID_t",
+                        "description": "Reference identifier assigned by HopCompID (628) associated with the message sent. It is recommended that this value be the MsgSeqNum (34) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      }
+                    },
+                    "fixmlComponent": "Hop"
+                  },
+                  "fixmlRepeating": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "x-fixml-metadata": {
+    "messageType": "ListStat",
+    "generatedAt": "2025-09-03T12:08:40.278Z",
+    "generator": "FIXML to JSON Schema Converter"
+  }
+}

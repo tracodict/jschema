@@ -1,0 +1,611 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TrdgSesListUpd",
+  "type": "object",
+  "properties": {
+    "ReqID": {
+      "type": "string",
+      "fixmlTypeName": "TradSesReqID_t",
+      "description": "Unique ID of a Trading Session Status message."
+    },
+    "ApplSeqCtrl": {
+      "type": "object",
+      "properties": {
+        "ApplID": {
+          "type": "string",
+          "fixmlTypeName": "ApplID_t",
+          "description": "Identifies the application with which a message is associated. Used only if application sequencing is in effect."
+        },
+        "ApplSeqNum": {
+          "type": "string",
+          "fixmlTypeName": "ApplSeqNum_t",
+          "description": "Data sequence number to be used when FIX session is not in effect"
+        },
+        "ApplLastSeqNum": {
+          "type": "string",
+          "fixmlTypeName": "ApplLastSeqNum_t",
+          "description": "Application sequence number of last message in transmission"
+        },
+        "ApplResendFlag": {
+          "type": "string",
+          "fixmlTypeName": "ApplResendFlag_t",
+          "description": "Used to indicate that a message is being sent in response to an Application Message Request. It is possible for both ApplResendFlag and PossDupFlag to be set on the same message if the Sender's cache size is greater than zero and the message is being resent due to a session level resend request"
+        }
+      },
+      "fixmlComponent": "ApplSeqCtrl"
+    },
+    "TrdSessLstGrp": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "SesID": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "TradingSessionID_enum_t",
+                "enum": [
+                  "Day",
+                  "HalfDay",
+                  "Morning",
+                  "Afternoon",
+                  "Evening",
+                  "After-hours",
+                  "Holiday"
+                ],
+                "enumKey": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7"
+                ],
+                "description": "Identifier for a trading session. \n                    A trading session spans an extended period of time that can also be expressed informally in terms of the trading day. Usage is determined by market or counterparties. \n                    To specify good for session where session spans more than one calendar day, use TimeInForce = 0 (Day) in conjunction with TradingSessionID(336). \n                    Bilaterally agreed values of data type \"String\" that start with a character can be used for backward compatibility."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "SesSub": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "TradingSessionSubID_enum_t",
+                "enum": [
+                  "Pre-Trading",
+                  "Opening or opening auction",
+                  "(Continuous) Trading",
+                  "Closing or closing auction",
+                  "Post-Trading",
+                  "Scheduled intraday auction",
+                  "Quiescent",
+                  "Any auction",
+                  "Unscheduled intraday auction",
+                  "Out of main session trading",
+                  "Private auction",
+                  "Public auction",
+                  "Group auction",
+                  "Order initiated auction"
+                ],
+                "enumKey": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12",
+                  "13",
+                  "14"
+                ],
+                "description": "Optional market assigned sub identifier for a trading phase within a trading session. Usage is determined by market or counterparties. Used by US based futures markets to identify exchange specific execution time bracket codes as required by US market regulations. Bilaterally agreed values of data type \"String\" that start with a character can be used for backward compatibility"
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "TradSesUpdtActn": {
+            "type": "string",
+            "fixmlTypeName": "TradSesUpdateAction_t"
+          },
+          "Exch": {
+            "type": "string",
+            "fixmlTypeName": "SecurityExchange_t",
+            "description": "Market used to help identify a security. \n                    Valid values: \n                    See \"Appendix 6-C\""
+          },
+          "MktID": {
+            "type": "string",
+            "fixmlTypeName": "MarketID_t",
+            "description": "Identifies the market"
+          },
+          "MktSegID": {
+            "type": "string",
+            "fixmlTypeName": "MarketSegmentID_t",
+            "description": "Identifies the market segment"
+          },
+          "TradingSessionDesc": {
+            "type": "string",
+            "fixmlTypeName": "TradingSessionDesc_t",
+            "description": "Trading Session description"
+          },
+          "Method": {
+            "type": "string",
+            "fixmlTypeName": "TradSesMethod_t"
+          },
+          "Mode": {
+            "type": "string",
+            "fixmlTypeName": "TradSesMode_t"
+          },
+          "Unsol": {
+            "type": "string",
+            "fixmlTypeName": "UnsolicitedIndicator_t"
+          },
+          "Stat": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "TradSesStatus_enum_t",
+                "enum": [
+                  "Unknown",
+                  "Halted",
+                  "Open",
+                  "Closed",
+                  "Pre-Open",
+                  "Pre-Close",
+                  "Request Rejected"
+                ],
+                "enumKey": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6"
+                ],
+                "description": "State of the trading session."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "StatRejRsn": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "TradSesStatusRejReason_enum_t",
+                "enum": [
+                  "Unknown or invalid TradingSessionID",
+                  "Other"
+                ],
+                "enumKey": [
+                  "1",
+                  "99"
+                ],
+                "description": "Indicates the reason a Trading Session Status Request was rejected."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "StartTm": {
+            "type": "string",
+            "fixmlTypeName": "TradSesStartTime_t",
+            "description": "Starting time of the trading session"
+          },
+          "OpenTm": {
+            "type": "string",
+            "fixmlTypeName": "TradSesOpenTime_t",
+            "description": "Time of the opening of the trading session"
+          },
+          "PreClsTm": {
+            "type": "string",
+            "fixmlTypeName": "TradSesPreCloseTime_t",
+            "description": "Time of the pre-closed of the trading session"
+          },
+          "ClsTm": {
+            "type": "string",
+            "fixmlTypeName": "TradSesCloseTime_t",
+            "description": "Closing time of the trading session"
+          },
+          "EndTm": {
+            "type": "string",
+            "fixmlTypeName": "TradSesEndTime_t",
+            "description": "End time of the trading session"
+          },
+          "TotVolTrdd": {
+            "type": "string",
+            "fixmlTypeName": "TotalVolumeTraded_t",
+            "description": "Total volume (quantity) traded."
+          },
+          "TxnTm": {
+            "type": "string",
+            "fixmlTypeName": "TransactTime_t",
+            "description": "Timestamp when the business transaction represented by the message occurred."
+          },
+          "Txt": {
+            "type": "string",
+            "fixmlTypeName": "Text_t",
+            "description": "Free format text string \n                    (Note: this field does not have a specified maximum length)"
+          },
+          "EncTxtLen": {
+            "type": "string",
+            "fixmlTypeName": "EncodedTextLen_t",
+            "description": "Byte length of encoded (non-ASCII characters) EncodedText (355) field."
+          },
+          "EncTxt": {
+            "type": "string",
+            "format": "base64",
+            "fixmlTypeName": "EncodedText_t",
+            "description": "Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field. If used, the ASCII (English) representation should also be specified in the Text(58) field."
+          },
+          "TrdgSesRules": {
+            "type": "object",
+            "properties": {
+              "OrdTypRules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "OrdTyp": {
+                      "type": "string",
+                      "fixmlTypeName": "OrdType_t"
+                    }
+                  },
+                  "fixmlComponent": "OrdTypRules"
+                },
+                "fixmlRepeating": true
+              },
+              "TmInForceRules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "TmInForce": {
+                      "type": "string",
+                      "fixmlTypeName": "TimeInForce_t"
+                    }
+                  },
+                  "fixmlComponent": "TmInForceRules"
+                },
+                "fixmlRepeating": true
+              },
+              "ExecInstRules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ExecInstValu": {
+                      "type": "string",
+                      "fixmlTypeName": "ExecInstValue_t"
+                    }
+                  },
+                  "fixmlComponent": "ExecInstRules"
+                },
+                "fixmlRepeating": true
+              },
+              "AuctTypRule": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "AuctTyp": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "fixmlTypeName": "AuctionType_enum_t",
+                          "enum": [
+                            "None",
+                            "Block order auction",
+                            "Directed order auction",
+                            "Exposure order auction",
+                            "Flash order auction",
+                            "Facilitation order auction",
+                            "Solicitation order auction",
+                            "Price improvement mechanism (PIM)",
+                            "Directed Order price improvement mechanism (PIM)"
+                          ],
+                          "enumKey": [
+                            "0",
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8"
+                          ],
+                          "description": "Type of auction order."
+                        },
+                        {
+                          "type": "integer",
+                          "fixmlTypeName": "Reserved100Plus",
+                          "minimum": 100,
+                          "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                        }
+                      ]
+                    },
+                    "AuctTypProdCmplx": {
+                      "type": "string",
+                      "fixmlTypeName": "AuctionTypeProductComplex_t",
+                      "description": "Identifies an entire suite of products for which the auction order type rule applies."
+                    }
+                  },
+                  "fixmlComponent": "AuctTypRule"
+                },
+                "fixmlRepeating": true
+              },
+              "MtchRules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "MtchAlgo": {
+                      "type": "string",
+                      "fixmlTypeName": "MatchAlgorithm_t",
+                      "description": "The types of algorithm used to match orders in a specific security. Possilbe value types are FIFO, Allocation, Pro-rata, Lead Market Maker, Currency Calender."
+                    },
+                    "MtchTyp": {
+                      "type": "string",
+                      "fixmlTypeName": "MatchType_t"
+                    },
+                    "MtchRuleProdCmplx": {
+                      "type": "string",
+                      "fixmlTypeName": "MatchRuleProductComplex_t",
+                      "description": "Identifies an entire suite of products for which the matching rule applies."
+                    },
+                    "CustPri": {
+                      "type": "string",
+                      "fixmlTypeName": "CustomerPriority_t"
+                    }
+                  },
+                  "fixmlComponent": "MtchRules"
+                },
+                "fixmlRepeating": true
+              },
+              "MDFeedTyps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "MDFeedTyp": {
+                      "type": "string",
+                      "fixmlTypeName": "MDFeedType_t",
+                      "description": "Describes a class of service for a given data feed, ie Regular and Market Maker, Bandwidth Intensive or Bandwidth Conservative"
+                    },
+                    "MDSubFeedTyp": {
+                      "type": "string",
+                      "fixmlTypeName": "MDSubFeedType_t",
+                      "description": "Describes a sub-class for a given class of service defined by MDFeedType (1022)"
+                    },
+                    "MktDepth": {
+                      "type": "integer",
+                      "fixmlTypeName": "MarketDepth_t",
+                      "description": "Depth of market for Book Snapshot / Incremental updates \n                    0 - full book depth \n                    1 - top of book \n                    2 and above - book depth (number of levels)"
+                    },
+                    "MktDepthTmIntvl": {
+                      "type": "integer",
+                      "fixmlTypeName": "MarketDepthTimeInterval_t",
+                      "description": "Specifies the time interval used for netting market data in a price depth feed."
+                    },
+                    "MktDepthTmIntvlUnit": {
+                      "type": "string",
+                      "fixmlTypeName": "MarketDepthTimeIntervalUnit_t"
+                    },
+                    "MDRcvryTmIntvl": {
+                      "type": "integer",
+                      "fixmlTypeName": "MDRecoveryTimeInterval_t",
+                      "description": "Specifies the time interval between two repetitions of the same market data for cyclic recovery feeds."
+                    },
+                    "MDRcvryTmIntvlUnit": {
+                      "type": "string",
+                      "fixmlTypeName": "MDRecoveryTimeIntervalUnit_t"
+                    },
+                    "MDBkTyp": {
+                      "type": "string",
+                      "fixmlTypeName": "MDBookType_t"
+                    },
+                    "MDSubBkTyp": {
+                      "type": "integer",
+                      "fixmlTypeName": "MDSubBookType_t",
+                      "description": "Describes a class of sub book, e.g. for the separation of various lot types. The Sub Book Type indicates that the following Market Data Entries belong to a non-integrated Sub Book. Whenever provided the Sub Book must be used together with MDPriceLevel and MDEntryPositionNo in order to sort the order properly. \n                    Values are bilaterally agreed."
+                    },
+                    "SvcLctnID1": {
+                      "type": "string",
+                      "fixmlTypeName": "PrimaryServiceLocationID_t",
+                      "description": "Primary service location identifier."
+                    },
+                    "SvcLctnID2": {
+                      "type": "string",
+                      "fixmlTypeName": "SecondaryServiceLocationID_t",
+                      "description": "Secondary or alternate service location identifier."
+                    }
+                  },
+                  "fixmlComponent": "MDFeedTyps"
+                },
+                "fixmlRepeating": true
+              }
+            },
+            "fixmlComponent": "TrdgSesRules"
+          }
+        },
+        "fixmlComponent": "TrdSessLstGrp",
+        "required": [
+          "SesID",
+          "Stat"
+        ]
+      },
+      "fixmlRepeating": true
+    }
+  },
+  "required": [],
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "Hdr": {
+          "type": "object",
+          "properties": {},
+          "fixmlComponent": "Hdr",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "MsgTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgType_t"
+                },
+                "ApplVerID": {
+                  "type": "string",
+                  "fixmlTypeName": "ApplVerID_t"
+                },
+                "SID": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderCompID_t",
+                  "description": "Assigned value used to identify firm sending message."
+                },
+                "TID": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetCompID_t",
+                  "description": "Assigned value used to identify receiving firm."
+                },
+                "OBID": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfCompID_t",
+                  "description": "Assigned value used to identify firm originating message if the message was delivered by a third party i.e. the third party firm identifier would be delivered in the SenderCompID field and the firm originating the message in this field."
+                },
+                "D2ID": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToCompID_t",
+                  "description": "Assigned value used to identify the firm targeted to receive the message if the message is delivered by a third party i.e. the third party firm identifier would be delivered in the TargetCompID (56) field and the ultimate receiver firm ID in this field."
+                },
+                "SeqNum": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgSeqNum_t",
+                  "description": "Integer message sequence number."
+                },
+                "SSub": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderSubID_t",
+                  "description": "Assigned value used to identify specific message originator (desk, trader, etc.)"
+                },
+                "SLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader)"
+                },
+                "TSub": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetSubID_t",
+                  "description": "Assigned value used to identify specific individual or unit intended to receive message. \"ADMIN\" reserved for administrative messages not intended for a specific user."
+                },
+                "TLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetLocationID_t",
+                  "description": "Assigned value used to identify specific message destination's location (i.e. geographic location and/or desk, trader)"
+                },
+                "OBSub": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfSubID_t",
+                  "description": "Assigned value used to identify specific message originator (i.e. trader) if the message was delivered by a third party"
+                },
+                "OBLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "D2Sub": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToSubID_t",
+                  "description": "Assigned value used to identify specific message recipient (i.e. trader) if the message is delivered by a third party"
+                },
+                "D2Loc": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToLocationID_t",
+                  "description": "Assigned value used to identify specific message recipient's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "PosDup": {
+                  "type": "string",
+                  "fixmlTypeName": "PossDupFlag_t"
+                },
+                "PosRsnd": {
+                  "type": "string",
+                  "fixmlTypeName": "PossResend_t"
+                },
+                "Snt": {
+                  "type": "string",
+                  "fixmlTypeName": "SendingTime_t",
+                  "description": "Time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\")"
+                },
+                "OrigSnt": {
+                  "type": "string",
+                  "fixmlTypeName": "OrigSendingTime_t",
+                  "description": "Original time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\") when transmitting orders as the result of a resend request."
+                },
+                "MsgEncd": {
+                  "type": "string",
+                  "fixmlTypeName": "MessageEncoding_t",
+                  "description": "Type of message encoding (non-ASCII (non-English) characters) used in a message's \"Encoded\" fields."
+                },
+                "Hop": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "HopCompID_t",
+                        "description": "Assigned value used to identify the third party firm which delivered a specific message either from the firm which originated the message or from another third party (if multiple \"hops\" are performed). It is recommended that this value be the SenderCompID (49) of the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Snt": {
+                        "type": "string",
+                        "fixmlTypeName": "HopSendingTime_t",
+                        "description": "Time that HopCompID (628) sent the message. It is recommended that this value be the SendingTime (52) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Ref": {
+                        "type": "string",
+                        "fixmlTypeName": "HopRefID_t",
+                        "description": "Reference identifier assigned by HopCompID (628) associated with the message sent. It is recommended that this value be the MsgSeqNum (34) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      }
+                    },
+                    "fixmlComponent": "Hop"
+                  },
+                  "fixmlRepeating": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "x-fixml-metadata": {
+    "messageType": "TrdgSesListUpd",
+    "generatedAt": "2025-09-03T12:08:40.328Z",
+    "generator": "FIXML to JSON Schema Converter"
+  }
+}

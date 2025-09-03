@@ -1,0 +1,514 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CnfmAck",
+  "type": "object",
+  "properties": {
+    "CnfmID": {
+      "type": "string",
+      "fixmlTypeName": "ConfirmID_t",
+      "description": "Message reference for Confirmation"
+    },
+    "TrdDt": {
+      "type": "string",
+      "fixmlTypeName": "TradeDate_t",
+      "description": "Indicates date of trading day. Absence of this field indicates current day (expressed in local time at place of trade)."
+    },
+    "TxnTm": {
+      "type": "string",
+      "fixmlTypeName": "TransactTime_t",
+      "description": "Timestamp when the business transaction represented by the message occurred."
+    },
+    "AffirmStat": {
+      "type": "string",
+      "fixmlTypeName": "AffirmStatus_t"
+    },
+    "TrdCnfmRefID": {
+      "type": "string",
+      "fixmlTypeName": "TradeConfirmationReferenceID_t",
+      "description": "A reference or control identifier or number used as a trade confirmation key."
+    },
+    "CnfmRejRsn": {
+      "anyOf": [
+        {
+          "type": "string",
+          "fixmlTypeName": "ConfirmRejReason_enum_t",
+          "enum": [
+            "Incorrect or missing account",
+            "Incorrect or missing settlement instructions",
+            "Unknown or missing IndividualAllocId(467)",
+            "Transaction not recognized",
+            "Duplicate transaction",
+            "Incorrect or missing instrument",
+            "Incorrect or missing price",
+            "Incorrect or missing commission",
+            "Incorrect or missing settlement date",
+            "Incorrect or missing fund ID or fund name",
+            "Incorrect or missing quantity",
+            "Incorrect or missing fees",
+            "Incorrect or missing tax",
+            "Incorrect or missing party",
+            "Incorrect or missing side",
+            "Incorrect or missing net-money",
+            "Incorrect or missing trade date",
+            "Incorrect or missing settlement currency instructions",
+            "Incorrect or missing capacity",
+            "Other"
+          ],
+          "enumKey": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "99"
+          ],
+          "description": "Identifies the reason for rejecting a Confirmation."
+        },
+        {
+          "type": "integer",
+          "fixmlTypeName": "Reserved100Plus",
+          "minimum": 100,
+          "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+        }
+      ]
+    },
+    "MtchStat": {
+      "type": "string",
+      "fixmlTypeName": "MatchStatus_t"
+    },
+    "Txt": {
+      "type": "string",
+      "fixmlTypeName": "Text_t",
+      "description": "Free format text string \n                    (Note: this field does not have a specified maximum length)"
+    },
+    "EncTxtLen": {
+      "type": "string",
+      "fixmlTypeName": "EncodedTextLen_t",
+      "description": "Byte length of encoded (non-ASCII characters) EncodedText (355) field."
+    },
+    "EncTxt": {
+      "type": "string",
+      "format": "base64",
+      "fixmlTypeName": "EncodedText_t",
+      "description": "Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field. If used, the ASCII (English) representation should also be specified in the Text(58) field."
+    },
+    "RegTrdID": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "fixmlTypeName": "RegulatoryTradeID_t",
+            "description": "Trade identifier required by government regulators or other regulatory organizations for regulatory reporting purposes. For example, unique swap identifer (USI) as required by the U.S. Commodity Futures Trading Commission."
+          },
+          "Src": {
+            "type": "string",
+            "fixmlTypeName": "RegulatoryTradeIDSource_t"
+          },
+          "Evnt": {
+            "type": "string",
+            "fixmlTypeName": "RegulatoryTradeIDEvent_t"
+          },
+          "Typ": {
+            "type": "string",
+            "fixmlTypeName": "RegulatoryTradeIDType_t"
+          },
+          "LegRefID": {
+            "type": "string",
+            "fixmlTypeName": "RegulatoryLegRefID_t",
+            "description": "Identifies the leg of the trade the entry applies to by referencing the leg's LegID(1788)."
+          },
+          "Scope": {
+            "type": "string",
+            "fixmlTypeName": "RegulatoryTradeIDScope_t"
+          }
+        },
+        "fixmlComponent": "RegTrdID"
+      },
+      "fixmlRepeating": true
+    },
+    "MtchExcptn": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Typ": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "MatchExceptionType_enum_t",
+                "enum": [
+                  "No matching confirmation",
+                  "No matching allocation",
+                  "Allocation data element missing",
+                  "Confirmation data element missing",
+                  "Data difference not within tolerance",
+                  "Match within tolerance",
+                  "Other"
+                ],
+                "enumKey": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "99"
+                ],
+                "description": "Type of matching exception."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "ID": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "MatchExceptionElementType_enum_t",
+                "enum": [
+                  "Accrued interest",
+                  "Deal price",
+                  "Trade date",
+                  "Settlement date",
+                  "Side indicator",
+                  "Traded currency",
+                  "Account ID",
+                  "Executing broker ID",
+                  "Settlement currency and amount",
+                  "Investment manager ID",
+                  "Net amount",
+                  "Place of settlement",
+                  "Commissions",
+                  "Security identifier",
+                  "Quantity allocated",
+                  "Principal",
+                  "Fees",
+                  "Tax"
+                ],
+                "enumKey": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12",
+                  "13",
+                  "14",
+                  "15",
+                  "16",
+                  "17",
+                  "18"
+                ],
+                "description": "Identifies the data point used in the matching operation which resulted in an exception."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "Name": {
+            "type": "string",
+            "fixmlTypeName": "MatchExceptionElementName_t",
+            "description": "The matching exception data point name, for example: \"Trade currency\". This may be used for display purposes, providing a corresponding description for the value in MatchExceptionElementType(2774)."
+          },
+          "AllocVal": {
+            "type": "string",
+            "fixmlTypeName": "MatchExceptionAllocValue_t",
+            "description": "The allocating party's data value used in the match operation."
+          },
+          "CnfmVal": {
+            "type": "string",
+            "fixmlTypeName": "MatchExceptionConfirmValue_t",
+            "description": "The confirming party's data value used in the match operation."
+          },
+          "TlrncVal": {
+            "type": "number",
+            "fixmlTypeName": "MatchExceptionToleranceValue_t",
+            "description": "The data element's tolerance value. Omitted if no tolerance is allowed or not applicable."
+          },
+          "TlrncValTyp": {
+            "type": "string",
+            "fixmlTypeName": "MatchExceptionToleranceValueType_t"
+          },
+          "Txt": {
+            "type": "string",
+            "fixmlTypeName": "MatchExceptionText_t",
+            "description": "Description of the exception."
+          },
+          "EncTxtLen": {
+            "type": "string",
+            "fixmlTypeName": "EncodedMatchExceptionTextLen_t",
+            "description": "Byte length of encoded (non-ASCII characters) EncodedMatchExceptionText(2798) field."
+          },
+          "EncTxt": {
+            "type": "string",
+            "format": "base64",
+            "fixmlTypeName": "EncodedMatchExceptionText_t",
+            "description": "Encoded (non-ASCII characters) representation of the MatchExceptionText(2780) field in the encoded format specified via the MessageEncoding(347) field. \n                    If used, the ASCII (English) representation should also be specified in the MatchExceptionText(2780) field."
+          }
+        },
+        "fixmlComponent": "MtchExcptn"
+      },
+      "fixmlRepeating": true
+    },
+    "MtchDataPnt": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Typ": {
+            "type": "string",
+            "fixmlTypeName": "MatchingDataPointIndicator_t"
+          },
+          "Val": {
+            "type": "string",
+            "fixmlTypeName": "MatchingDataPointValue_t",
+            "description": "Value of the matching data point."
+          },
+          "ID": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "MatchExceptionElementType_enum_t",
+                "enum": [
+                  "Accrued interest",
+                  "Deal price",
+                  "Trade date",
+                  "Settlement date",
+                  "Side indicator",
+                  "Traded currency",
+                  "Account ID",
+                  "Executing broker ID",
+                  "Settlement currency and amount",
+                  "Investment manager ID",
+                  "Net amount",
+                  "Place of settlement",
+                  "Commissions",
+                  "Security identifier",
+                  "Quantity allocated",
+                  "Principal",
+                  "Fees",
+                  "Tax"
+                ],
+                "enumKey": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12",
+                  "13",
+                  "14",
+                  "15",
+                  "16",
+                  "17",
+                  "18"
+                ],
+                "description": "Identifies the data point used in the matching operation which resulted in an exception."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "Name": {
+            "type": "string",
+            "fixmlTypeName": "MatchingDataPointName_t",
+            "description": "The matching data point name, for example: \"Trade currency\". This may be used for display purposes, providing a corresponding description for the value in MatchingDataPointType(2784)."
+          }
+        },
+        "fixmlComponent": "MtchDataPnt"
+      },
+      "fixmlRepeating": true
+    }
+  },
+  "required": [
+    "CnfmID",
+    "TrdDt",
+    "TxnTm",
+    "AffirmStat"
+  ],
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "Hdr": {
+          "type": "object",
+          "properties": {},
+          "fixmlComponent": "Hdr",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "MsgTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgType_t"
+                },
+                "ApplVerID": {
+                  "type": "string",
+                  "fixmlTypeName": "ApplVerID_t"
+                },
+                "SID": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderCompID_t",
+                  "description": "Assigned value used to identify firm sending message."
+                },
+                "TID": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetCompID_t",
+                  "description": "Assigned value used to identify receiving firm."
+                },
+                "OBID": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfCompID_t",
+                  "description": "Assigned value used to identify firm originating message if the message was delivered by a third party i.e. the third party firm identifier would be delivered in the SenderCompID field and the firm originating the message in this field."
+                },
+                "D2ID": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToCompID_t",
+                  "description": "Assigned value used to identify the firm targeted to receive the message if the message is delivered by a third party i.e. the third party firm identifier would be delivered in the TargetCompID (56) field and the ultimate receiver firm ID in this field."
+                },
+                "SeqNum": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgSeqNum_t",
+                  "description": "Integer message sequence number."
+                },
+                "SSub": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderSubID_t",
+                  "description": "Assigned value used to identify specific message originator (desk, trader, etc.)"
+                },
+                "SLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader)"
+                },
+                "TSub": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetSubID_t",
+                  "description": "Assigned value used to identify specific individual or unit intended to receive message. \"ADMIN\" reserved for administrative messages not intended for a specific user."
+                },
+                "TLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetLocationID_t",
+                  "description": "Assigned value used to identify specific message destination's location (i.e. geographic location and/or desk, trader)"
+                },
+                "OBSub": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfSubID_t",
+                  "description": "Assigned value used to identify specific message originator (i.e. trader) if the message was delivered by a third party"
+                },
+                "OBLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "D2Sub": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToSubID_t",
+                  "description": "Assigned value used to identify specific message recipient (i.e. trader) if the message is delivered by a third party"
+                },
+                "D2Loc": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToLocationID_t",
+                  "description": "Assigned value used to identify specific message recipient's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "PosDup": {
+                  "type": "string",
+                  "fixmlTypeName": "PossDupFlag_t"
+                },
+                "PosRsnd": {
+                  "type": "string",
+                  "fixmlTypeName": "PossResend_t"
+                },
+                "Snt": {
+                  "type": "string",
+                  "fixmlTypeName": "SendingTime_t",
+                  "description": "Time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\")"
+                },
+                "OrigSnt": {
+                  "type": "string",
+                  "fixmlTypeName": "OrigSendingTime_t",
+                  "description": "Original time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\") when transmitting orders as the result of a resend request."
+                },
+                "MsgEncd": {
+                  "type": "string",
+                  "fixmlTypeName": "MessageEncoding_t",
+                  "description": "Type of message encoding (non-ASCII (non-English) characters) used in a message's \"Encoded\" fields."
+                },
+                "Hop": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "HopCompID_t",
+                        "description": "Assigned value used to identify the third party firm which delivered a specific message either from the firm which originated the message or from another third party (if multiple \"hops\" are performed). It is recommended that this value be the SenderCompID (49) of the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Snt": {
+                        "type": "string",
+                        "fixmlTypeName": "HopSendingTime_t",
+                        "description": "Time that HopCompID (628) sent the message. It is recommended that this value be the SendingTime (52) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Ref": {
+                        "type": "string",
+                        "fixmlTypeName": "HopRefID_t",
+                        "description": "Reference identifier assigned by HopCompID (628) associated with the message sent. It is recommended that this value be the MsgSeqNum (34) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      }
+                    },
+                    "fixmlComponent": "Hop"
+                  },
+                  "fixmlRepeating": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "x-fixml-metadata": {
+    "messageType": "CnfmAck",
+    "generatedAt": "2025-09-03T12:08:40.218Z",
+    "generator": "FIXML to JSON Schema Converter"
+  }
+}

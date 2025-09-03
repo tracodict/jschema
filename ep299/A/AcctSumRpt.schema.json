@@ -1,0 +1,894 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AcctSumRpt",
+  "type": "object",
+  "properties": {
+    "RptID": {
+      "type": "string",
+      "fixmlTypeName": "AccountSummaryReportID_t",
+      "description": "Unique identifier for the AccountSummaryReport(35=CQ)."
+    },
+    "BizDt": {
+      "type": "string",
+      "fixmlTypeName": "ClearingBusinessDate_t",
+      "description": "The business date for which the trade is expected to be cleared."
+    },
+    "Ccy": {
+      "type": "string",
+      "fixmlTypeName": "Currency_t",
+      "description": "Identifies currency used for price or quantity fields, depending on the asset class being traded. CurrencyCodeSource(2897) may be used to disambiguate the code source scheme used, and ISO 4217 is the default scheme if absent. \n                    Absence of this field is interpreted as the default currency for the security as defined by the respective reference data. It is recommended that systems provide the currency value whenever possible."
+    },
+    "TotNetValu": {
+      "type": "string",
+      "fixmlTypeName": "TotalNetValue_t",
+      "description": "TotalNetValue is determined as follows: \n                    At the initial collateral assignment TotalNetValue is the sum of (UnderlyingStartValue * (1-haircut)). \n                    In a collateral substitution TotalNetValue is the sum of (UnderlyingCurrentValue * (1-haircut)). \n                    For listed derivatives clearing margin management, this is the collateral value which equals (Market value * haircut)"
+    },
+    "MgnExcess": {
+      "type": "string",
+      "fixmlTypeName": "MarginExcess_t",
+      "description": "Excess margin amount (deficit if value is negative)"
+    },
+    "SetSesID": {
+      "type": "string",
+      "fixmlTypeName": "SettlSessID_t"
+    },
+    "SetSesSub": {
+      "type": "string",
+      "fixmlTypeName": "SettlSessSubID_t",
+      "description": "SubID value associated with SettlSessID(716)"
+    },
+    "TxnTm": {
+      "type": "string",
+      "fixmlTypeName": "TransactTime_t",
+      "description": "Timestamp when the business transaction represented by the message occurred."
+    },
+    "ApplSeqCtrl": {
+      "type": "object",
+      "properties": {
+        "ApplID": {
+          "type": "string",
+          "fixmlTypeName": "ApplID_t",
+          "description": "Identifies the application with which a message is associated. Used only if application sequencing is in effect."
+        },
+        "ApplSeqNum": {
+          "type": "string",
+          "fixmlTypeName": "ApplSeqNum_t",
+          "description": "Data sequence number to be used when FIX session is not in effect"
+        },
+        "ApplLastSeqNum": {
+          "type": "string",
+          "fixmlTypeName": "ApplLastSeqNum_t",
+          "description": "Application sequence number of last message in transmission"
+        },
+        "ApplResendFlag": {
+          "type": "string",
+          "fixmlTypeName": "ApplResendFlag_t",
+          "description": "Used to indicate that a message is being sent in response to an Application Message Request. It is possible for both ApplResendFlag and PossDupFlag to be set on the same message if the Sender's cache size is greater than zero and the message is being resent due to a session level resend request"
+        }
+      },
+      "fixmlComponent": "ApplSeqCtrl"
+    },
+    "SettlAmt": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amt": {
+            "type": "string",
+            "fixmlTypeName": "SettlementAmount_t",
+            "description": "The amount of settlement."
+          },
+          "Ccy": {
+            "type": "string",
+            "fixmlTypeName": "SettlementAmountCurrency_t",
+            "description": "The currency of the reported settlement amount."
+          },
+          "CcySrc": {
+            "type": "string",
+            "fixmlTypeName": "SettlementAmountCurrencyCodeSource_t"
+          }
+        },
+        "fixmlComponent": "SettlAmt"
+      },
+      "fixmlRepeating": true
+    },
+    "MgnAmt": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amt": {
+            "type": "string",
+            "fixmlTypeName": "MarginAmt_t",
+            "description": "Amount of margin requirement."
+          },
+          "Typ": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "MarginAmtType_enum_t",
+                "enum": [
+                  "Additional Margin",
+                  "Adjusted Margin",
+                  "Unadjusted Margin",
+                  "Binary Add-On Amount",
+                  "Cash Balance Amount",
+                  "Concentration Margin",
+                  "Core Margin",
+                  "Delivery Margin",
+                  "Discretionary Margin",
+                  "Futures Spread Margin",
+                  "Initial Margin",
+                  "Liquidating Margin",
+                  "Margin Call Amount",
+                  "Margin Deficit Amount (Shortfall)",
+                  "Margin Excess Amount (Surplus)",
+                  "Option Premium Amount",
+                  "Premium Margin",
+                  "Reserve Margin",
+                  "Security Collateral Amount",
+                  "Stress Test Add-On Amount",
+                  "Super Margin",
+                  "Total Margin",
+                  "Variation Margin",
+                  "Secondary Variation Margin",
+                  "Rolled up margin deficit",
+                  "Spread response margin",
+                  "Systemic risk margin",
+                  "Curve risk margin",
+                  "Index spread risk margin",
+                  "Sector risk margin",
+                  "Jump-to-default risk margin",
+                  "Basis risk margin",
+                  "Interest rate risk margin",
+                  "Jump-to-health risk margin",
+                  "Other risk margin"
+                ],
+                "enumKey": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12",
+                  "13",
+                  "14",
+                  "15",
+                  "16",
+                  "17",
+                  "18",
+                  "19",
+                  "20",
+                  "21",
+                  "22",
+                  "23",
+                  "24",
+                  "25",
+                  "26",
+                  "27",
+                  "28",
+                  "29",
+                  "30",
+                  "31",
+                  "32",
+                  "33",
+                  "34",
+                  "35"
+                ],
+                "description": "Type of margin requirement amount being specified."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "Ccy": {
+            "type": "string",
+            "fixmlTypeName": "MarginAmtCcy_t",
+            "description": "Currency of the MarginAmt(1645)."
+          },
+          "FxRt": {
+            "type": "number",
+            "fixmlTypeName": "MarginAmtFXRate_t",
+            "description": "Foreign exchange rate used to compute the MarginAmt(1645) from the MarginAmtCcy(1646) and the Currency(15)."
+          },
+          "FxRtCalc": {
+            "type": "string",
+            "fixmlTypeName": "MarginAmtFXRateCalc_t"
+          },
+          "MktSegID": {
+            "type": "string",
+            "fixmlTypeName": "MarginAmountMarketSegmentID_t",
+            "description": "Market segment associated with the margin amount."
+          },
+          "MktID": {
+            "type": "string",
+            "fixmlTypeName": "MarginAmountMarketID_t",
+            "description": "Market associated with the margin amount"
+          },
+          "Dirctn": {
+            "type": "string",
+            "fixmlTypeName": "MarginDirection_t"
+          }
+        },
+        "fixmlComponent": "MgnAmt"
+      },
+      "fixmlRepeating": true
+    },
+    "Pty": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "fixmlTypeName": "PartyID_t",
+            "description": "Party identifier/code. See PartyIDSource (447) and PartyRole (452). \n                    See \"Appendix 6-G - Use of <Parties> Component Block\""
+          },
+          "Src": {
+            "type": "string",
+            "fixmlTypeName": "PartyIDSource_t"
+          },
+          "R": {
+            "type": "string",
+            "fixmlTypeName": "PartyRole_t"
+          },
+          "Qual": {
+            "type": "string",
+            "fixmlTypeName": "PartyRoleQualifier_t"
+          },
+          "Sub": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ID": {
+                  "type": "string",
+                  "fixmlTypeName": "PartySubID_t",
+                  "description": "Sub-identifier (e.g. Clearing Account for PartyRole (452)=Clearing Firm, Locate ID # for PartyRole=Locate/Lending Firm, etc). Not required when using PartyID (448), PartyIDSource (447), and PartyRole."
+                },
+                "Typ": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "fixmlTypeName": "PartySubIDType_enum_t",
+                      "enum": [
+                        "Firm",
+                        "Person",
+                        "System",
+                        "Application",
+                        "Full legal name of firm",
+                        "Postal address",
+                        "Phone number",
+                        "Email address",
+                        "Contact name",
+                        "Securities account number (for settlement instructions)",
+                        "Registration number (for settlement instructions and confirmations)",
+                        "Registered address (for confirmation purposes)",
+                        "Regulatory status (for confirmation purposes)",
+                        "Registration name (for settlement instructions)",
+                        "Cash account number (for settlement instructions)",
+                        "BIC",
+                        "CSD participant member code",
+                        "Registered address",
+                        "Fund account name",
+                        "Telex number",
+                        "Fax number",
+                        "Securities account name",
+                        "Cash account name",
+                        "Department",
+                        "Location desk",
+                        "Position account type",
+                        "Security locate ID",
+                        "Market maker",
+                        "Eligible counterparty",
+                        "Professional client",
+                        "Location",
+                        "Execution venue",
+                        "Currency delivery identifier",
+                        "Address City",
+                        "Address State/Province",
+                        "Address Postal Code",
+                        "Address Street",
+                        "Address Country (ISO country code)",
+                        "ISO country code",
+                        "Market segment",
+                        "Customer account type",
+                        "Omnibus account",
+                        "Funds segregation type",
+                        "Guarantee fund",
+                        "Swap dealer",
+                        "Major participant",
+                        "Financial entity",
+                        "U.S. person",
+                        "Reporting entity indicator",
+                        "Elected clearing requirement exception",
+                        "Business center",
+                        "Reference text",
+                        "Short-marking exempt account",
+                        "Parent firm identifier",
+                        "Parent firm name",
+                        "Deal identifier",
+                        "System trade identifier",
+                        "System trade sub-identifier",
+                        "Futures Commission Merchant (FCM) code",
+                        "Delivery terminal customer account/code",
+                        "Voluntary reporting entity",
+                        "Reporting obligation jurisdiction",
+                        "Voluntary reporting jurisdiction",
+                        "Company activities",
+                        "European Economic Area domiciled",
+                        "Contract linked to commercial or treasury financing for this counterparty",
+                        "Contract above clearing threshold for this counterparty",
+                        "Voluntary reporting party",
+                        "End user",
+                        "Location or jurisdiction",
+                        "Derivatives dealer",
+                        "Domicile",
+                        "Exempt from recognition",
+                        "Payer",
+                        "Receiver",
+                        "Systematic Internaliser (SI)",
+                        "Publishing entity indicator",
+                        "First name",
+                        "Surname",
+                        "Date of birth",
+                        "Order transmitting firm",
+                        "Order transmitting firm for buyer",
+                        "Order transmitter for seller",
+                        "Legal Entity Identifier (ISO 17442) LEI",
+                        "Sub-sector classification",
+                        "Party side",
+                        "Legal registration country"
+                      ],
+                      "enumKey": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "20",
+                        "21",
+                        "22",
+                        "23",
+                        "24",
+                        "25",
+                        "26",
+                        "27",
+                        "28",
+                        "29",
+                        "30",
+                        "31",
+                        "32",
+                        "33",
+                        "34",
+                        "35",
+                        "36",
+                        "37",
+                        "38",
+                        "39",
+                        "40",
+                        "41",
+                        "42",
+                        "43",
+                        "44",
+                        "45",
+                        "46",
+                        "47",
+                        "48",
+                        "49",
+                        "50",
+                        "51",
+                        "52",
+                        "53",
+                        "54",
+                        "55",
+                        "56",
+                        "57",
+                        "58",
+                        "59",
+                        "60",
+                        "61",
+                        "62",
+                        "63",
+                        "64",
+                        "65",
+                        "66",
+                        "67",
+                        "68",
+                        "69",
+                        "70",
+                        "71",
+                        "72",
+                        "73",
+                        "74",
+                        "75",
+                        "76",
+                        "77",
+                        "78",
+                        "79",
+                        "80",
+                        "81",
+                        "82",
+                        "83",
+                        "84",
+                        "85",
+                        "86",
+                        "87"
+                      ],
+                      "description": "Type of PartySubID(523) value."
+                    },
+                    {
+                      "type": "integer",
+                      "fixmlTypeName": "Reserved4000Plus",
+                      "minimum": 4000,
+                      "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                    }
+                  ]
+                }
+              },
+              "fixmlComponent": "Sub"
+            },
+            "fixmlRepeating": true
+          }
+        },
+        "fixmlComponent": "Pty"
+      },
+      "fixmlRepeating": true
+    },
+    "CollAmt": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amt": {
+            "type": "string",
+            "fixmlTypeName": "CurrentCollateralAmount_t",
+            "description": "Currency value currently attributed to the collateral."
+          },
+          "Ccy": {
+            "type": "string",
+            "fixmlTypeName": "CollateralCurrency_t",
+            "description": "Currency of the collateral; optional, defaults to the Settlement Currency if not specified."
+          },
+          "CcySrc": {
+            "type": "string",
+            "fixmlTypeName": "CollateralCurrencyCodeSource_t"
+          },
+          "AmtTyp": {
+            "type": "string",
+            "fixmlTypeName": "CollateralAmountType_t"
+          },
+          "FxRt": {
+            "type": "number",
+            "fixmlTypeName": "CollateralFXRate_t",
+            "description": "Foreign exchange rate used to compute the CurrentCollateralAmount(1704) from the CollateralCurrency(1646) and the Currency(15)."
+          },
+          "FxRtCalc": {
+            "type": "string",
+            "fixmlTypeName": "CollateralFXRateCalc_t"
+          },
+          "Typ": {
+            "type": "string",
+            "fixmlTypeName": "CollateralType_t",
+            "description": "Type of collateral on deposit being reported."
+          },
+          "MktSegID": {
+            "type": "string",
+            "fixmlTypeName": "CollateralAmountMarketSegmentID_t",
+            "description": "Market segment associated with the collateral amount."
+          },
+          "MktID": {
+            "type": "string",
+            "fixmlTypeName": "CollateralAmountMarketID_t",
+            "description": "Market associated with the collateral amount."
+          },
+          "HrctInd": {
+            "type": "string",
+            "fixmlTypeName": "HaircutIndicator_t",
+            "description": "Indicates, if \"Y\", that a stated valuation includes a haircut, e.g. that the stated value reflects the subtraction of the haircut. Note that a value of \"N\" does not imply a haircut is not applicable, only that the haircut (if any) is not reflected in the stated valuation."
+          },
+          "PrtflioID": {
+            "type": "string",
+            "fixmlTypeName": "CollateralPortfolioID_t",
+            "description": "Identifier of the collateral portfolio when reporting on a portfolio basis."
+          },
+          "PctOvrg": {
+            "type": "string",
+            "fixmlTypeName": "CollateralPercentOverage_t",
+            "description": "Percentage of over-collateralization particularly when CollateralAmountType(2632) = 4 (Additional collateral value)"
+          },
+          "MktPx": {
+            "type": "string",
+            "fixmlTypeName": "CollateralMarketPrice_t",
+            "description": "Market price of the collateral, either from market sources or pre-agreed by the counterparties."
+          },
+          "RnvstmntRt": {
+            "type": "string",
+            "fixmlTypeName": "CollateralReinvestmentRate_t",
+            "description": "Interest rate received for collateral reinvestment."
+          },
+          "UndlyRefID": {
+            "type": "string",
+            "fixmlTypeName": "UnderlyingRefID_t",
+            "description": "Identifies the underlying instrument the entity applies to by referencing the underlying instrument's UnderlyingID(2874)."
+          },
+          "CollRnvstmnt": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Typ": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "fixmlTypeName": "CollateralReinvestmentType_enum_t",
+                      "enum": [
+                        "Money market fund",
+                        "Other comingled pool",
+                        "Repo market",
+                        "Direct purchase of securities",
+                        "Other investments"
+                      ],
+                      "enumKey": [
+                        "0",
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ],
+                      "description": "Indicates the type of investment the cash collateral is re-invested in."
+                    },
+                    {
+                      "type": "integer",
+                      "fixmlTypeName": "Reserved100Plus",
+                      "minimum": 100,
+                      "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                    }
+                  ]
+                },
+                "Amt": {
+                  "type": "string",
+                  "fixmlTypeName": "CollateralReinvestmentAmount_t",
+                  "description": "The cash amount of the specified re-investment type."
+                },
+                "Ccy": {
+                  "type": "string",
+                  "fixmlTypeName": "CollateralReinvestmentCurrency_t",
+                  "description": "The currency denomination of the re-invested cash amount. \n                    CollateralReinvestmentCurrencyCodeSource(2931) may be used to disambiguate the code source scheme used, and ISO 4217 is the default scheme if absent."
+                },
+                "CcySrc": {
+                  "type": "string",
+                  "fixmlTypeName": "CollateralReinvestmentCurrencyCodeSource_t"
+                }
+              },
+              "fixmlComponent": "CollRnvstmnt"
+            },
+            "fixmlRepeating": true
+          }
+        },
+        "fixmlComponent": "CollAmt"
+      },
+      "fixmlRepeating": true
+    },
+    "PayCol": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Typ": {
+            "type": "string",
+            "fixmlTypeName": "PayCollectType_t",
+            "description": "Category describing the reason for funds paid to, or the funds collected from the clearing firm."
+          },
+          "Ccy": {
+            "type": "string",
+            "fixmlTypeName": "PayCollectCurrency_t",
+            "description": "Currency denomination of value in PayAmount(1710) and CollectAmount(1711). If not specified, default to currency specified in SettlementAmountCurrency(1702)."
+          },
+          "CcySrc": {
+            "type": "string",
+            "fixmlTypeName": "PayCollectCurrencyCodeSource_t"
+          },
+          "FxRt": {
+            "type": "number",
+            "fixmlTypeName": "PayCollectFXRate_t",
+            "description": "Foreign exchange rate used to compute the PayAmount(1710) or CollectAmount(1711) from the PayCollectCurrency(1709) and the Currency(15)."
+          },
+          "FxRtCalc": {
+            "type": "string",
+            "fixmlTypeName": "PayCollectFXRateCalc_t"
+          },
+          "PayAmt": {
+            "type": "string",
+            "fixmlTypeName": "PayAmount_t",
+            "description": "Amount to be paid by the clearinghouse to the clearing firm."
+          },
+          "ColAmt": {
+            "type": "string",
+            "fixmlTypeName": "CollectAmount_t",
+            "description": "Amount to be collected by the clearinghouse from the clearing firm."
+          },
+          "MktSegID": {
+            "type": "string",
+            "fixmlTypeName": "PayCollectMarketSegmentID_t",
+            "description": "Market segment associated with the pay collect amount."
+          },
+          "MktID": {
+            "type": "string",
+            "fixmlTypeName": "PayCollectMarketID_t",
+            "description": "Market associated with the pay collect amount."
+          }
+        },
+        "fixmlComponent": "PayCol"
+      },
+      "fixmlRepeating": true
+    },
+    "Amt": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Typ": {
+            "type": "string",
+            "fixmlTypeName": "PosAmtType_t"
+          },
+          "Amt": {
+            "type": "string",
+            "fixmlTypeName": "PosAmt_t",
+            "description": "Position amount"
+          },
+          "StrmDesc": {
+            "type": "string",
+            "fixmlTypeName": "PosAmtStreamDesc_t",
+            "description": "Corresponds to the value in StreamDesc(40051) in the StreamGrp component."
+          },
+          "Ccy": {
+            "type": "string",
+            "fixmlTypeName": "PositionCurrency_t",
+            "description": "The Currency in which the position Amount is denominated"
+          },
+          "CcySrc": {
+            "type": "string",
+            "fixmlTypeName": "PositionCurrencyCodeSource_t"
+          },
+          "FxRt": {
+            "type": "number",
+            "fixmlTypeName": "PositionFXRate_t",
+            "description": "Foreign exchange rate used to compute the PosAmt(708) from the PositionCurrency(1055) and the Currency (15)."
+          },
+          "FxRtCalc": {
+            "type": "string",
+            "fixmlTypeName": "PositionFXRateCalc_t"
+          },
+          "Rsn": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "PosAmtReason_enum_t",
+                "enum": [
+                  "Options settlement",
+                  "Pending erosion adjustment",
+                  "Final erosion adjustment",
+                  "Tear-up coupon amount",
+                  "Price alignment interest",
+                  "Delivery invoice charges",
+                  "Delivery storage charges"
+                ],
+                "enumKey": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6"
+                ],
+                "description": "Specifies the reason for an amount type when reported on a position. Useful when multiple instances of the same amount type are reported."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved1000Plus",
+                "minimum": 1000,
+                "description": "Values \"1000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "MktSegID": {
+            "type": "string",
+            "fixmlTypeName": "PosAmtMarketSegmentID_t",
+            "description": "Market segment associated with the position amount."
+          },
+          "MktID": {
+            "type": "string",
+            "fixmlTypeName": "PosAmtMarketID_t",
+            "description": "Market associated with the position amount."
+          },
+          "Px": {
+            "type": "string",
+            "fixmlTypeName": "PosAmtPrice_t",
+            "description": "The price used to calculate the PosAmt(708)."
+          },
+          "PxTyp": {
+            "type": "string",
+            "fixmlTypeName": "PosAmtPriceType_t"
+          }
+        },
+        "fixmlComponent": "Amt"
+      },
+      "fixmlRepeating": true
+    }
+  },
+  "required": [
+    "RptID",
+    "BizDt"
+  ],
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "Hdr": {
+          "type": "object",
+          "properties": {},
+          "fixmlComponent": "Hdr",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "MsgTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgType_t"
+                },
+                "ApplVerID": {
+                  "type": "string",
+                  "fixmlTypeName": "ApplVerID_t"
+                },
+                "SID": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderCompID_t",
+                  "description": "Assigned value used to identify firm sending message."
+                },
+                "TID": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetCompID_t",
+                  "description": "Assigned value used to identify receiving firm."
+                },
+                "OBID": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfCompID_t",
+                  "description": "Assigned value used to identify firm originating message if the message was delivered by a third party i.e. the third party firm identifier would be delivered in the SenderCompID field and the firm originating the message in this field."
+                },
+                "D2ID": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToCompID_t",
+                  "description": "Assigned value used to identify the firm targeted to receive the message if the message is delivered by a third party i.e. the third party firm identifier would be delivered in the TargetCompID (56) field and the ultimate receiver firm ID in this field."
+                },
+                "SeqNum": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgSeqNum_t",
+                  "description": "Integer message sequence number."
+                },
+                "SSub": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderSubID_t",
+                  "description": "Assigned value used to identify specific message originator (desk, trader, etc.)"
+                },
+                "SLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader)"
+                },
+                "TSub": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetSubID_t",
+                  "description": "Assigned value used to identify specific individual or unit intended to receive message. \"ADMIN\" reserved for administrative messages not intended for a specific user."
+                },
+                "TLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetLocationID_t",
+                  "description": "Assigned value used to identify specific message destination's location (i.e. geographic location and/or desk, trader)"
+                },
+                "OBSub": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfSubID_t",
+                  "description": "Assigned value used to identify specific message originator (i.e. trader) if the message was delivered by a third party"
+                },
+                "OBLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "D2Sub": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToSubID_t",
+                  "description": "Assigned value used to identify specific message recipient (i.e. trader) if the message is delivered by a third party"
+                },
+                "D2Loc": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToLocationID_t",
+                  "description": "Assigned value used to identify specific message recipient's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "PosDup": {
+                  "type": "string",
+                  "fixmlTypeName": "PossDupFlag_t"
+                },
+                "PosRsnd": {
+                  "type": "string",
+                  "fixmlTypeName": "PossResend_t"
+                },
+                "Snt": {
+                  "type": "string",
+                  "fixmlTypeName": "SendingTime_t",
+                  "description": "Time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\")"
+                },
+                "OrigSnt": {
+                  "type": "string",
+                  "fixmlTypeName": "OrigSendingTime_t",
+                  "description": "Original time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\") when transmitting orders as the result of a resend request."
+                },
+                "MsgEncd": {
+                  "type": "string",
+                  "fixmlTypeName": "MessageEncoding_t",
+                  "description": "Type of message encoding (non-ASCII (non-English) characters) used in a message's \"Encoded\" fields."
+                },
+                "Hop": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "HopCompID_t",
+                        "description": "Assigned value used to identify the third party firm which delivered a specific message either from the firm which originated the message or from another third party (if multiple \"hops\" are performed). It is recommended that this value be the SenderCompID (49) of the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Snt": {
+                        "type": "string",
+                        "fixmlTypeName": "HopSendingTime_t",
+                        "description": "Time that HopCompID (628) sent the message. It is recommended that this value be the SendingTime (52) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Ref": {
+                        "type": "string",
+                        "fixmlTypeName": "HopRefID_t",
+                        "description": "Reference identifier assigned by HopCompID (628) associated with the message sent. It is recommended that this value be the MsgSeqNum (34) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      }
+                    },
+                    "fixmlComponent": "Hop"
+                  },
+                  "fixmlRepeating": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "x-fixml-metadata": {
+    "messageType": "AcctSumRpt",
+    "generatedAt": "2025-09-03T12:08:40.142Z",
+    "generator": "FIXML to JSON Schema Converter"
+  }
+}

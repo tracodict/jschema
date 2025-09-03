@@ -1,0 +1,1184 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MktDef",
+  "type": "object",
+  "properties": {
+    "MktRptID": {
+      "type": "string",
+      "fixmlTypeName": "MarketReportID_t",
+      "description": "Market Definition message identifier."
+    },
+    "MktReqID": {
+      "type": "string",
+      "fixmlTypeName": "MarketReqID_t",
+      "description": "Unique ID of a Market Definition Request message."
+    },
+    "MktID": {
+      "type": "string",
+      "fixmlTypeName": "MarketID_t",
+      "description": "Identifies the market"
+    },
+    "MktSegID": {
+      "type": "string",
+      "fixmlTypeName": "MarketSegmentID_t",
+      "description": "Identifies the market segment"
+    },
+    "MarketSegmentDesc": {
+      "type": "string",
+      "fixmlTypeName": "MarketSegmentDesc_t",
+      "description": "Description or name of Market Segment"
+    },
+    "EncodedMktSegmDescLen": {
+      "type": "string",
+      "fixmlTypeName": "EncodedMktSegmDescLen_t",
+      "description": "Byte length of encoded (non-ASCII characters) EncodedMktSegmDesc(1324) field."
+    },
+    "EncodedMktSegmDesc": {
+      "type": "string",
+      "format": "base64",
+      "fixmlTypeName": "EncodedMktSegmDesc_t",
+      "description": "Encoded (non-ASCII characters) representation of the MarketSegmDesc(1396) field in the encoded format specified via the MessageEncoding(347) field. If used, the ASCII (English) representation should also be specified in the MarketSegmDesc field."
+    },
+    "ParentMktSegmID": {
+      "type": "string",
+      "fixmlTypeName": "ParentMktSegmID_t",
+      "description": "Reference to a parent Market Segment. See MarketSegmentID(1300)"
+    },
+    "MktSegStat": {
+      "type": "string",
+      "fixmlTypeName": "MarketSegmentStatus_t"
+    },
+    "MktSegTyp": {
+      "type": "string",
+      "fixmlTypeName": "MarketSegmentType_t"
+    },
+    "MktSegSubTyp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "fixmlTypeName": "MarketSegmentSubType_enum_t",
+          "enum": [
+            "Inter-product spread"
+          ],
+          "enumKey": [
+            "1"
+          ],
+          "description": "Used to further categorize market segments within a MarketSegmentType(2543)."
+        },
+        {
+          "type": "integer",
+          "fixmlTypeName": "Reserved100Plus",
+          "minimum": 100,
+          "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+        }
+      ]
+    },
+    "Ccy": {
+      "type": "string",
+      "fixmlTypeName": "Currency_t",
+      "description": "Identifies currency used for price or quantity fields, depending on the asset class being traded. CurrencyCodeSource(2897) may be used to disambiguate the code source scheme used, and ISO 4217 is the default scheme if absent. \n                    Absence of this field is interpreted as the default currency for the security as defined by the respective reference data. It is recommended that systems provide the currency value whenever possible."
+    },
+    "CcySrc": {
+      "type": "string",
+      "fixmlTypeName": "CurrencyCodeSource_t"
+    },
+    "EfctvBizDt": {
+      "type": "string",
+      "fixmlTypeName": "EffectiveBusinessDate_t",
+      "description": "Specifies an explicit business date for associated reference data or transaction. Used when an implicit date is not sufficiently specific."
+    },
+    "TxnTm": {
+      "type": "string",
+      "fixmlTypeName": "TransactTime_t",
+      "description": "Timestamp when the business transaction represented by the message occurred."
+    },
+    "Txt": {
+      "type": "string",
+      "fixmlTypeName": "Text_t",
+      "description": "Free format text string \n                    (Note: this field does not have a specified maximum length)"
+    },
+    "EncTxtLen": {
+      "type": "string",
+      "fixmlTypeName": "EncodedTextLen_t",
+      "description": "Byte length of encoded (non-ASCII characters) EncodedText (355) field."
+    },
+    "EncTxt": {
+      "type": "string",
+      "format": "base64",
+      "fixmlTypeName": "EncodedText_t",
+      "description": "Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field. If used, the ASCII (English) representation should also be specified in the Text(58) field."
+    },
+    "ApplSeqCtrl": {
+      "type": "object",
+      "properties": {
+        "ApplID": {
+          "type": "string",
+          "fixmlTypeName": "ApplID_t",
+          "description": "Identifies the application with which a message is associated. Used only if application sequencing is in effect."
+        },
+        "ApplSeqNum": {
+          "type": "string",
+          "fixmlTypeName": "ApplSeqNum_t",
+          "description": "Data sequence number to be used when FIX session is not in effect"
+        },
+        "ApplLastSeqNum": {
+          "type": "string",
+          "fixmlTypeName": "ApplLastSeqNum_t",
+          "description": "Application sequence number of last message in transmission"
+        },
+        "ApplResendFlag": {
+          "type": "string",
+          "fixmlTypeName": "ApplResendFlag_t",
+          "description": "Used to indicate that a message is being sent in response to an Application Message Request. It is possible for both ApplResendFlag and PossDupFlag to be set on the same message if the Sender's cache size is greater than zero and the message is being resent due to a session level resend request"
+        }
+      },
+      "fixmlComponent": "ApplSeqCtrl"
+    },
+    "InstrmtScope": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Oper": {
+            "type": "string",
+            "fixmlTypeName": "InstrumentScopeOperator_t"
+          },
+          "AID": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "AltID": {
+                  "type": "string",
+                  "fixmlTypeName": "InstrumentScopeSecurityAltID_t",
+                  "description": "Used to limit instrument scope to specified security alternate identifier. \n                    See SecurityAltID(455) field for description."
+                },
+                "AltIDSrc": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "fixmlTypeName": "SecurityIDSource_enum_t",
+                      "enum": [
+                        "CUSIP",
+                        "SEDOL",
+                        "QUIK",
+                        "ISIN",
+                        "RIC",
+                        "ISO Currency Code (ISO 4217)",
+                        "ISO Country Code",
+                        "Exchange symbol",
+                        "Consolidated Tape Association (CTA) Symbol (SIAC CTS/CQS line format)",
+                        "Bloomberg Symbol",
+                        "Wertpapier",
+                        "Dutch",
+                        "Valoren",
+                        "Sicovam",
+                        "Belgian",
+                        "\"Common\" (Clearstream and Euroclear)",
+                        "Clearing house / Clearing organization",
+                        "ISDA/FpML product specification (XML in SecurityXML(1185))",
+                        "Option Price Reporting Authority",
+                        "ISDA/FpML product URL (URL in SecurityID(48))",
+                        "Letter of credit",
+                        "Marketplace-assigned Identifier",
+                        "Markit RED entity CLIP",
+                        "Markit RED pair CLIP",
+                        "CFTC commodity code",
+                        "ISDA Commodity Reference Price",
+                        "Financial Instrument Global Identifier",
+                        "Legal entity identifier",
+                        "Synthetic",
+                        "Fidessa Instrument Mnemonic (FIM)",
+                        "Index name",
+                        "Uniform Symbol (UMTF Symbol)",
+                        "Digital Token Identifier (ISO 24165)"
+                      ],
+                      "enumKey": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L",
+                        "M",
+                        "N",
+                        "P",
+                        "Q",
+                        "R",
+                        "S",
+                        "T",
+                        "U",
+                        "V",
+                        "W",
+                        "X",
+                        "Y"
+                      ],
+                      "description": "Identifies class or source of the SecurityID(48) value."
+                    },
+                    {
+                      "type": "integer",
+                      "fixmlTypeName": "Reserved100Plus",
+                      "minimum": 100,
+                      "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                    }
+                  ]
+                }
+              },
+              "fixmlComponent": "AID"
+            },
+            "fixmlRepeating": true
+          }
+        },
+        "fixmlComponent": "InstrmtScope"
+      },
+      "fixmlRepeating": true
+    },
+    "ReltdMktSeg": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ReltdMktSegID": {
+            "type": "string",
+            "fixmlTypeName": "RelatedMarketSegmentID_t",
+            "description": "Identifies a related market segment."
+          },
+          "MktSegRltnshp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "MarketSegmentRelationship_enum_t",
+                "enum": [
+                  "Market segment pool member",
+                  "Retail segment",
+                  "Wholesale segment"
+                ],
+                "enumKey": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "description": "Type of relationship between two or more market segments."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          }
+        },
+        "fixmlComponent": "ReltdMktSeg"
+      },
+      "fixmlRepeating": true
+    },
+    "BaseTrdgRules": {
+      "type": "object",
+      "properties": {
+        "ExpirationCycle": {
+          "type": "string",
+          "fixmlTypeName": "ExpirationCycle_t"
+        },
+        "TrdVolTyp": {
+          "type": "string",
+          "fixmlTypeName": "TradeVolType_t"
+        },
+        "MinTrdVol": {
+          "type": "string",
+          "fixmlTypeName": "MinTradeVol_t",
+          "description": "The minimum order quantity (as expressed by TradeVolType(1786)) that can be submitted for a security."
+        },
+        "MaxTrdVol": {
+          "type": "string",
+          "fixmlTypeName": "MaxTradeVol_t",
+          "description": "The maximum order quantity (as expressed by TradeVolType(1786)) that can be submitted for a security."
+        },
+        "MxPxVar": {
+          "type": "number",
+          "fixmlTypeName": "MaxPriceVariation_t",
+          "description": "The maximum price variation of an execution from one event to the next for a given security. Expressed in absolute price terms."
+        },
+        "ImpldMktInd": {
+          "type": "string",
+          "fixmlTypeName": "ImpliedMarketIndicator_t"
+        },
+        "TrdCcy": {
+          "type": "string",
+          "fixmlTypeName": "TradingCurrency_t",
+          "description": "Used when the trading currency can differ from the price currency"
+        },
+        "TrdCcySrc": {
+          "type": "string",
+          "fixmlTypeName": "TradingCurrencyCodeSource_t"
+        },
+        "RndLot": {
+          "type": "string",
+          "fixmlTypeName": "RoundLot_t",
+          "description": "The trading lot size of a security"
+        },
+        "MlegModel": {
+          "type": "string",
+          "fixmlTypeName": "MultilegModel_t"
+        },
+        "MlegPxMeth": {
+          "type": "string",
+          "fixmlTypeName": "MultilegPriceMethod_t"
+        },
+        "PxTyp": {
+          "type": "string",
+          "fixmlTypeName": "PriceType_t"
+        },
+        "FastMktPctage": {
+          "type": "string",
+          "fixmlTypeName": "FastMarketPercentage_t",
+          "description": "The percentage factor to be applied to trading rule parameters (e.g. price ranges, size ranges, etc.) when fast market conditions are applicable."
+        },
+        "QuotSideInd": {
+          "type": "string",
+          "fixmlTypeName": "QuoteSideIndicator_t"
+        },
+        "TickRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "StartTickPxRng": {
+                "type": "string",
+                "fixmlTypeName": "StartTickPriceRange_t",
+                "description": "Starting price range for specified tick increment"
+              },
+              "EndTickPxRng": {
+                "type": "string",
+                "fixmlTypeName": "EndTickPriceRange_t",
+                "description": "Ending price range for the specified tick increment"
+              },
+              "TickIncr": {
+                "type": "string",
+                "fixmlTypeName": "TickIncrement_t",
+                "description": "Tick increment for stated price range. Specifies the valid price increments at which a security can be quoted and traded"
+              },
+              "TickRuleTyp": {
+                "type": "string",
+                "fixmlTypeName": "TickRuleType_t"
+              },
+              "TickRuleProdCmplx": {
+                "type": "string",
+                "fixmlTypeName": "TickRuleProductComplex_t",
+                "description": "Identifies an entire suite of products for which the price tick rule applies."
+              },
+              "SettlPxIncr": {
+                "type": "string",
+                "fixmlTypeName": "SettlPriceIncrement_t",
+                "description": "Settlement price increment for stated price range."
+              },
+              "SettlPxIncr2": {
+                "type": "string",
+                "fixmlTypeName": "SettlPriceSecondaryIncrement_t",
+                "description": "Secondary settlement price increment for stated price range. The meaning of secondary is left to bilateral agreement, e.g. it may refer to final settlement for a contract."
+              }
+            },
+            "fixmlComponent": "TickRules"
+          },
+          "fixmlRepeating": true
+        },
+        "LotTypeRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "LotTyp": {
+                "type": "string",
+                "fixmlTypeName": "LotType_t"
+              },
+              "MinLotSz": {
+                "type": "string",
+                "fixmlTypeName": "MinLotSize_t",
+                "description": "Minimum lot size allowed based on lot type specified in LotType(1093)"
+              }
+            },
+            "fixmlComponent": "LotTypeRules"
+          },
+          "fixmlRepeating": true
+        },
+        "PxLmts": {
+          "type": "object",
+          "properties": {
+            "PxLmtTyp": {
+              "type": "string",
+              "fixmlTypeName": "PriceLimitType_t"
+            },
+            "LowLmtPx": {
+              "type": "string",
+              "fixmlTypeName": "LowLimitPrice_t",
+              "description": "Allowable low limit price for the trading day. A key parameter in validating order price. Used as the lower band for validating order prices. Orders submitted with prices below the lower limit will be rejected"
+            },
+            "HiLmtPx": {
+              "type": "string",
+              "fixmlTypeName": "HighLimitPrice_t",
+              "description": "Allowable high limit price for the trading day. A key parameter in validating order price. Used as the upper band for validating order prices. Orders submitted with prices above the upper limit will be rejected"
+            },
+            "TrdgRefPx": {
+              "type": "string",
+              "fixmlTypeName": "TradingReferencePrice_t",
+              "description": "Reference price for the current trading price range usually representing the mid price between the HighLimitPrice and LowLimitPrice. The value may be the settlement price or closing price of the prior trading day."
+            }
+          },
+          "fixmlComponent": "PxLmts"
+        },
+        "PxRngRule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "StartPxRng": {
+                "type": "string",
+                "fixmlTypeName": "StartPriceRange_t",
+                "description": "Lower boundary for price range."
+              },
+              "EndPxRng": {
+                "type": "string",
+                "fixmlTypeName": "EndPriceRange_t",
+                "description": "Upper boundary for price range."
+              },
+              "PxRngValu": {
+                "type": "string",
+                "fixmlTypeName": "PriceRangeValue_t",
+                "description": "Maximum range expressed as absolute value."
+              },
+              "PxRngPctage": {
+                "type": "string",
+                "fixmlTypeName": "PriceRangePercentage_t",
+                "description": "Maximum range expressed as percentage."
+              },
+              "PxRngRuleID": {
+                "type": "string",
+                "fixmlTypeName": "PriceRangeRuleID_t",
+                "description": "Identifier for a price range rule."
+              },
+              "PxRngProdCmplx": {
+                "type": "string",
+                "fixmlTypeName": "PriceRangeProductComplex_t",
+                "description": "Identifies an entire suite of products in the context of trading rules related to price ranges."
+              }
+            },
+            "fixmlComponent": "PxRngRule"
+          },
+          "fixmlRepeating": true
+        },
+        "QteSzRule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "MinBidSz": {
+                "type": "string",
+                "fixmlTypeName": "MinBidSize_t",
+                "description": "Used to indicate a minimum quantity for a bid."
+              },
+              "MinOfrSz": {
+                "type": "string",
+                "fixmlTypeName": "MinOfferSize_t",
+                "description": "Used to indicate a minimum quantity for an offer. If this field is used the OfferSize (135) field is interpreted as the maximum offer size."
+              },
+              "FastMktInd": {
+                "type": "string",
+                "fixmlTypeName": "FastMarketIndicator_t",
+                "description": "Indicates if the instrument is in \"fast market\" state."
+              }
+            },
+            "fixmlComponent": "QteSzRule"
+          },
+          "fixmlRepeating": true
+        }
+      },
+      "fixmlComponent": "BaseTrdgRules"
+    },
+    "OrdTypRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "OrdTyp": {
+            "type": "string",
+            "fixmlTypeName": "OrdType_t"
+          }
+        },
+        "fixmlComponent": "OrdTypRules"
+      },
+      "fixmlRepeating": true
+    },
+    "TmInForceRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "TmInForce": {
+            "type": "string",
+            "fixmlTypeName": "TimeInForce_t"
+          }
+        },
+        "fixmlComponent": "TmInForceRules"
+      },
+      "fixmlRepeating": true
+    },
+    "ExecInstRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ExecInstValu": {
+            "type": "string",
+            "fixmlTypeName": "ExecInstValue_t"
+          }
+        },
+        "fixmlComponent": "ExecInstRules"
+      },
+      "fixmlRepeating": true
+    },
+    "AuctTypRule": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "AuctTyp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "fixmlTypeName": "AuctionType_enum_t",
+                "enum": [
+                  "None",
+                  "Block order auction",
+                  "Directed order auction",
+                  "Exposure order auction",
+                  "Flash order auction",
+                  "Facilitation order auction",
+                  "Solicitation order auction",
+                  "Price improvement mechanism (PIM)",
+                  "Directed Order price improvement mechanism (PIM)"
+                ],
+                "enumKey": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8"
+                ],
+                "description": "Type of auction order."
+              },
+              {
+                "type": "integer",
+                "fixmlTypeName": "Reserved100Plus",
+                "minimum": 100,
+                "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+              }
+            ]
+          },
+          "AuctTypProdCmplx": {
+            "type": "string",
+            "fixmlTypeName": "AuctionTypeProductComplex_t",
+            "description": "Identifies an entire suite of products for which the auction order type rule applies."
+          }
+        },
+        "fixmlComponent": "AuctTypRule"
+      },
+      "fixmlRepeating": true
+    },
+    "MDFeedTyps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "MDFeedTyp": {
+            "type": "string",
+            "fixmlTypeName": "MDFeedType_t",
+            "description": "Describes a class of service for a given data feed, ie Regular and Market Maker, Bandwidth Intensive or Bandwidth Conservative"
+          },
+          "MDSubFeedTyp": {
+            "type": "string",
+            "fixmlTypeName": "MDSubFeedType_t",
+            "description": "Describes a sub-class for a given class of service defined by MDFeedType (1022)"
+          },
+          "MktDepth": {
+            "type": "integer",
+            "fixmlTypeName": "MarketDepth_t",
+            "description": "Depth of market for Book Snapshot / Incremental updates \n                    0 - full book depth \n                    1 - top of book \n                    2 and above - book depth (number of levels)"
+          },
+          "MktDepthTmIntvl": {
+            "type": "integer",
+            "fixmlTypeName": "MarketDepthTimeInterval_t",
+            "description": "Specifies the time interval used for netting market data in a price depth feed."
+          },
+          "MktDepthTmIntvlUnit": {
+            "type": "string",
+            "fixmlTypeName": "MarketDepthTimeIntervalUnit_t"
+          },
+          "MDRcvryTmIntvl": {
+            "type": "integer",
+            "fixmlTypeName": "MDRecoveryTimeInterval_t",
+            "description": "Specifies the time interval between two repetitions of the same market data for cyclic recovery feeds."
+          },
+          "MDRcvryTmIntvlUnit": {
+            "type": "string",
+            "fixmlTypeName": "MDRecoveryTimeIntervalUnit_t"
+          },
+          "MDBkTyp": {
+            "type": "string",
+            "fixmlTypeName": "MDBookType_t"
+          },
+          "MDSubBkTyp": {
+            "type": "integer",
+            "fixmlTypeName": "MDSubBookType_t",
+            "description": "Describes a class of sub book, e.g. for the separation of various lot types. The Sub Book Type indicates that the following Market Data Entries belong to a non-integrated Sub Book. Whenever provided the Sub Book must be used together with MDPriceLevel and MDEntryPositionNo in order to sort the order properly. \n                    Values are bilaterally agreed."
+          },
+          "SvcLctnID1": {
+            "type": "string",
+            "fixmlTypeName": "PrimaryServiceLocationID_t",
+            "description": "Primary service location identifier."
+          },
+          "SvcLctnID2": {
+            "type": "string",
+            "fixmlTypeName": "SecondaryServiceLocationID_t",
+            "description": "Secondary or alternate service location identifier."
+          }
+        },
+        "fixmlComponent": "MDFeedTyps"
+      },
+      "fixmlRepeating": true
+    },
+    "MtchRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "MtchAlgo": {
+            "type": "string",
+            "fixmlTypeName": "MatchAlgorithm_t",
+            "description": "The types of algorithm used to match orders in a specific security. Possilbe value types are FIFO, Allocation, Pro-rata, Lead Market Maker, Currency Calender."
+          },
+          "MtchTyp": {
+            "type": "string",
+            "fixmlTypeName": "MatchType_t"
+          },
+          "MtchRuleProdCmplx": {
+            "type": "string",
+            "fixmlTypeName": "MatchRuleProductComplex_t",
+            "description": "Identifies an entire suite of products for which the matching rule applies."
+          },
+          "CustPri": {
+            "type": "string",
+            "fixmlTypeName": "CustomerPriority_t"
+          }
+        },
+        "fixmlComponent": "MtchRules"
+      },
+      "fixmlRepeating": true
+    },
+    "FlexProdElig": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "FlexProdElig": {
+            "type": "string",
+            "fixmlTypeName": "FlexProductEligibilityIndicator_t",
+            "description": "Used to indicate if a product or group of product supports the creation of flexible securities"
+          },
+          "FlexProdEligCmplx": {
+            "type": "string",
+            "fixmlTypeName": "FlexProductEligibilityComplex_t",
+            "description": "Identifies an entire suite of products which are eligible for the creation of flexible securities."
+          }
+        },
+        "fixmlComponent": "FlexProdElig"
+      },
+      "fixmlRepeating": true
+    },
+    "Pty": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "fixmlTypeName": "PartyID_t",
+            "description": "Party identifier/code. See PartyIDSource (447) and PartyRole (452). \n                    See \"Appendix 6-G - Use of <Parties> Component Block\""
+          },
+          "Src": {
+            "type": "string",
+            "fixmlTypeName": "PartyIDSource_t"
+          },
+          "R": {
+            "type": "string",
+            "fixmlTypeName": "PartyRole_t"
+          },
+          "Qual": {
+            "type": "string",
+            "fixmlTypeName": "PartyRoleQualifier_t"
+          },
+          "Sub": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ID": {
+                  "type": "string",
+                  "fixmlTypeName": "PartySubID_t",
+                  "description": "Sub-identifier (e.g. Clearing Account for PartyRole (452)=Clearing Firm, Locate ID # for PartyRole=Locate/Lending Firm, etc). Not required when using PartyID (448), PartyIDSource (447), and PartyRole."
+                },
+                "Typ": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "fixmlTypeName": "PartySubIDType_enum_t",
+                      "enum": [
+                        "Firm",
+                        "Person",
+                        "System",
+                        "Application",
+                        "Full legal name of firm",
+                        "Postal address",
+                        "Phone number",
+                        "Email address",
+                        "Contact name",
+                        "Securities account number (for settlement instructions)",
+                        "Registration number (for settlement instructions and confirmations)",
+                        "Registered address (for confirmation purposes)",
+                        "Regulatory status (for confirmation purposes)",
+                        "Registration name (for settlement instructions)",
+                        "Cash account number (for settlement instructions)",
+                        "BIC",
+                        "CSD participant member code",
+                        "Registered address",
+                        "Fund account name",
+                        "Telex number",
+                        "Fax number",
+                        "Securities account name",
+                        "Cash account name",
+                        "Department",
+                        "Location desk",
+                        "Position account type",
+                        "Security locate ID",
+                        "Market maker",
+                        "Eligible counterparty",
+                        "Professional client",
+                        "Location",
+                        "Execution venue",
+                        "Currency delivery identifier",
+                        "Address City",
+                        "Address State/Province",
+                        "Address Postal Code",
+                        "Address Street",
+                        "Address Country (ISO country code)",
+                        "ISO country code",
+                        "Market segment",
+                        "Customer account type",
+                        "Omnibus account",
+                        "Funds segregation type",
+                        "Guarantee fund",
+                        "Swap dealer",
+                        "Major participant",
+                        "Financial entity",
+                        "U.S. person",
+                        "Reporting entity indicator",
+                        "Elected clearing requirement exception",
+                        "Business center",
+                        "Reference text",
+                        "Short-marking exempt account",
+                        "Parent firm identifier",
+                        "Parent firm name",
+                        "Deal identifier",
+                        "System trade identifier",
+                        "System trade sub-identifier",
+                        "Futures Commission Merchant (FCM) code",
+                        "Delivery terminal customer account/code",
+                        "Voluntary reporting entity",
+                        "Reporting obligation jurisdiction",
+                        "Voluntary reporting jurisdiction",
+                        "Company activities",
+                        "European Economic Area domiciled",
+                        "Contract linked to commercial or treasury financing for this counterparty",
+                        "Contract above clearing threshold for this counterparty",
+                        "Voluntary reporting party",
+                        "End user",
+                        "Location or jurisdiction",
+                        "Derivatives dealer",
+                        "Domicile",
+                        "Exempt from recognition",
+                        "Payer",
+                        "Receiver",
+                        "Systematic Internaliser (SI)",
+                        "Publishing entity indicator",
+                        "First name",
+                        "Surname",
+                        "Date of birth",
+                        "Order transmitting firm",
+                        "Order transmitting firm for buyer",
+                        "Order transmitter for seller",
+                        "Legal Entity Identifier (ISO 17442) LEI",
+                        "Sub-sector classification",
+                        "Party side",
+                        "Legal registration country"
+                      ],
+                      "enumKey": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "20",
+                        "21",
+                        "22",
+                        "23",
+                        "24",
+                        "25",
+                        "26",
+                        "27",
+                        "28",
+                        "29",
+                        "30",
+                        "31",
+                        "32",
+                        "33",
+                        "34",
+                        "35",
+                        "36",
+                        "37",
+                        "38",
+                        "39",
+                        "40",
+                        "41",
+                        "42",
+                        "43",
+                        "44",
+                        "45",
+                        "46",
+                        "47",
+                        "48",
+                        "49",
+                        "50",
+                        "51",
+                        "52",
+                        "53",
+                        "54",
+                        "55",
+                        "56",
+                        "57",
+                        "58",
+                        "59",
+                        "60",
+                        "61",
+                        "62",
+                        "63",
+                        "64",
+                        "65",
+                        "66",
+                        "67",
+                        "68",
+                        "69",
+                        "70",
+                        "71",
+                        "72",
+                        "73",
+                        "74",
+                        "75",
+                        "76",
+                        "77",
+                        "78",
+                        "79",
+                        "80",
+                        "81",
+                        "82",
+                        "83",
+                        "84",
+                        "85",
+                        "86",
+                        "87"
+                      ],
+                      "description": "Type of PartySubID(523) value."
+                    },
+                    {
+                      "type": "integer",
+                      "fixmlTypeName": "Reserved4000Plus",
+                      "minimum": 4000,
+                      "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                    }
+                  ]
+                }
+              },
+              "fixmlComponent": "Sub"
+            },
+            "fixmlRepeating": true
+          }
+        },
+        "fixmlComponent": "Pty"
+      },
+      "fixmlRepeating": true
+    },
+    "MiscFees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Amt": {
+            "type": "string",
+            "fixmlTypeName": "MiscFeeAmt_t",
+            "description": "Miscellaneous fee value"
+          },
+          "Curr": {
+            "type": "string",
+            "fixmlTypeName": "MiscFeeCurr_t",
+            "description": "Currency of miscellaneous fee"
+          },
+          "Typ": {
+            "type": "string",
+            "fixmlTypeName": "MiscFeeType_t"
+          },
+          "Qual": {
+            "type": "string",
+            "fixmlTypeName": "MiscFeeQualifier_t"
+          },
+          "Basis": {
+            "type": "string",
+            "fixmlTypeName": "MiscFeeBasis_t"
+          },
+          "Rt": {
+            "type": "string",
+            "fixmlTypeName": "MiscFeeRate_t",
+            "description": "The fee rate when MiscFeeAmt(137) is a percentage of trade quantity."
+          },
+          "AmtDue": {
+            "type": "string",
+            "fixmlTypeName": "MiscFeeAmountDue_t",
+            "description": "The fee amount due if different from MiscFeeAmt(137)."
+          },
+          "Desc": {
+            "type": "string",
+            "fixmlTypeName": "MiscFeeDesc_t",
+            "description": "Can be used to provide a textual description of the fee type."
+          },
+          "MiscFeesSub": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Typ": {
+                  "type": "string",
+                  "fixmlTypeName": "MiscFeeSubType_t",
+                  "description": "Used to provide more granular fee types related to a value of MiscFeeType(139). \n                    See http://www.fixtradingcommunity.org/codelists#Misc_Fee_Sub_Types for code list of applicable fees. Other fee sub-types may be used by mutual agreement of the counterparties."
+                },
+                "Amt": {
+                  "type": "string",
+                  "fixmlTypeName": "MiscFeeSubTypeAmt_t",
+                  "description": "The amount of the specified MiscFeeSubType(2634)."
+                },
+                "Desc": {
+                  "type": "string",
+                  "fixmlTypeName": "MiscFeeSubTypeDesc_t",
+                  "description": "Can be used to provide an optional textual description of the fee sub-type."
+                },
+                "EncDescLen": {
+                  "type": "string",
+                  "fixmlTypeName": "EncodedMiscFeeSubTypeDescLen_t",
+                  "description": "Byte length of encoded (non-ASCII characters) EncodedMiscFeeSubTypeDesc(2638) field."
+                },
+                "EncDesc": {
+                  "type": "string",
+                  "format": "base64",
+                  "fixmlTypeName": "EncodedMiscFeeSubTypeDesc_t",
+                  "description": "Encoded (non-ASCII characters) representation of the MiscFeeSubTypeDesc(2636) field in the encoded format specified via the MessageEncoding (347) field. If used, the ASCII (English) representation should also be specified in the MiscFeeSubTypeDesc(2636) field."
+                }
+              },
+              "fixmlComponent": "MiscFeesSub"
+            },
+            "fixmlRepeating": true
+          }
+        },
+        "fixmlComponent": "MiscFees"
+      },
+      "fixmlRepeating": true
+    }
+  },
+  "required": [
+    "MktRptID",
+    "MktID"
+  ],
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "Hdr": {
+          "type": "object",
+          "properties": {},
+          "fixmlComponent": "Hdr",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "MsgTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgType_t"
+                },
+                "ApplVerID": {
+                  "type": "string",
+                  "fixmlTypeName": "ApplVerID_t"
+                },
+                "SID": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderCompID_t",
+                  "description": "Assigned value used to identify firm sending message."
+                },
+                "TID": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetCompID_t",
+                  "description": "Assigned value used to identify receiving firm."
+                },
+                "OBID": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfCompID_t",
+                  "description": "Assigned value used to identify firm originating message if the message was delivered by a third party i.e. the third party firm identifier would be delivered in the SenderCompID field and the firm originating the message in this field."
+                },
+                "D2ID": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToCompID_t",
+                  "description": "Assigned value used to identify the firm targeted to receive the message if the message is delivered by a third party i.e. the third party firm identifier would be delivered in the TargetCompID (56) field and the ultimate receiver firm ID in this field."
+                },
+                "SeqNum": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgSeqNum_t",
+                  "description": "Integer message sequence number."
+                },
+                "SSub": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderSubID_t",
+                  "description": "Assigned value used to identify specific message originator (desk, trader, etc.)"
+                },
+                "SLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader)"
+                },
+                "TSub": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetSubID_t",
+                  "description": "Assigned value used to identify specific individual or unit intended to receive message. \"ADMIN\" reserved for administrative messages not intended for a specific user."
+                },
+                "TLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetLocationID_t",
+                  "description": "Assigned value used to identify specific message destination's location (i.e. geographic location and/or desk, trader)"
+                },
+                "OBSub": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfSubID_t",
+                  "description": "Assigned value used to identify specific message originator (i.e. trader) if the message was delivered by a third party"
+                },
+                "OBLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "D2Sub": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToSubID_t",
+                  "description": "Assigned value used to identify specific message recipient (i.e. trader) if the message is delivered by a third party"
+                },
+                "D2Loc": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToLocationID_t",
+                  "description": "Assigned value used to identify specific message recipient's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "PosDup": {
+                  "type": "string",
+                  "fixmlTypeName": "PossDupFlag_t"
+                },
+                "PosRsnd": {
+                  "type": "string",
+                  "fixmlTypeName": "PossResend_t"
+                },
+                "Snt": {
+                  "type": "string",
+                  "fixmlTypeName": "SendingTime_t",
+                  "description": "Time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\")"
+                },
+                "OrigSnt": {
+                  "type": "string",
+                  "fixmlTypeName": "OrigSendingTime_t",
+                  "description": "Original time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\") when transmitting orders as the result of a resend request."
+                },
+                "MsgEncd": {
+                  "type": "string",
+                  "fixmlTypeName": "MessageEncoding_t",
+                  "description": "Type of message encoding (non-ASCII (non-English) characters) used in a message's \"Encoded\" fields."
+                },
+                "Hop": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "HopCompID_t",
+                        "description": "Assigned value used to identify the third party firm which delivered a specific message either from the firm which originated the message or from another third party (if multiple \"hops\" are performed). It is recommended that this value be the SenderCompID (49) of the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Snt": {
+                        "type": "string",
+                        "fixmlTypeName": "HopSendingTime_t",
+                        "description": "Time that HopCompID (628) sent the message. It is recommended that this value be the SendingTime (52) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Ref": {
+                        "type": "string",
+                        "fixmlTypeName": "HopRefID_t",
+                        "description": "Reference identifier assigned by HopCompID (628) associated with the message sent. It is recommended that this value be the MsgSeqNum (34) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      }
+                    },
+                    "fixmlComponent": "Hop"
+                  },
+                  "fixmlRepeating": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "x-fixml-metadata": {
+    "messageType": "MktDef",
+    "generatedAt": "2025-09-03T12:08:40.328Z",
+    "generator": "FIXML to JSON Schema Converter"
+  }
+}

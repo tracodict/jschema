@@ -1,0 +1,1593 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PtyEntlmntRpt",
+  "type": "object",
+  "properties": {
+    "RptID": {
+      "type": "string",
+      "fixmlTypeName": "EntitlementReportID_t",
+      "description": "Identifier for the PartyEntitlementsReport(35=CV)."
+    },
+    "ReqID": {
+      "type": "string",
+      "fixmlTypeName": "EntitlementRequestID_t",
+      "description": "Unique identifier for PartyEntitlementsRequest(35=CU)."
+    },
+    "ReqRslt": {
+      "anyOf": [
+        {
+          "type": "string",
+          "fixmlTypeName": "RequestResult_enum_t",
+          "enum": [
+            "Valid request",
+            "Invalid or unsupported request",
+            "No data found that match selection criteria",
+            "Not authorized to retrieve data",
+            "Data temporarily unavailable",
+            "Request for data not supported",
+            "Other (further information in RejectText (1328) field)"
+          ],
+          "enumKey": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "99"
+          ],
+          "description": "Result of a request as identified by the appropriate request ID field"
+        },
+        {
+          "type": "integer",
+          "fixmlTypeName": "Reserved4000Plus",
+          "minimum": 4000,
+          "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+        }
+      ]
+    },
+    "TotNoPtys": {
+      "type": "integer",
+      "fixmlTypeName": "TotNoParties_t",
+      "description": "Total number of PartyListGrp returned."
+    },
+    "LastFragment": {
+      "type": "string",
+      "fixmlTypeName": "LastFragment_t"
+    },
+    "TxnTm": {
+      "type": "string",
+      "fixmlTypeName": "TransactTime_t",
+      "description": "Timestamp when the business transaction represented by the message occurred."
+    },
+    "Txt": {
+      "type": "string",
+      "fixmlTypeName": "Text_t",
+      "description": "Free format text string \n                    (Note: this field does not have a specified maximum length)"
+    },
+    "EncTxtLen": {
+      "type": "string",
+      "fixmlTypeName": "EncodedTextLen_t",
+      "description": "Byte length of encoded (non-ASCII characters) EncodedText (355) field."
+    },
+    "EncTxt": {
+      "type": "string",
+      "format": "base64",
+      "fixmlTypeName": "EncodedText_t",
+      "description": "Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field. If used, the ASCII (English) representation should also be specified in the Text(58) field."
+    },
+    "RejTxt": {
+      "type": "string",
+      "fixmlTypeName": "RejectText_t",
+      "description": "Identifies the reason for rejection."
+    },
+    "EncRejTxtLen": {
+      "type": "string",
+      "fixmlTypeName": "EncodedRejectTextLen_t",
+      "description": "Byte length of encoded (non-ASCII characters) EncodedRejectText(1665) field."
+    },
+    "EncRejTxt": {
+      "type": "string",
+      "format": "base64",
+      "fixmlTypeName": "EncodedRejectText_t",
+      "description": "Encoded (non-ASCII characters) representation of the RejectText(1328) field in the encoded format specified via the MessageEncoding(347) field. If used, the ASCII (English) representation should also be specified in the RejectText(1328) field."
+    },
+    "ApplSeqCtrl": {
+      "type": "object",
+      "properties": {
+        "ApplID": {
+          "type": "string",
+          "fixmlTypeName": "ApplID_t",
+          "description": "Identifies the application with which a message is associated. Used only if application sequencing is in effect."
+        },
+        "ApplSeqNum": {
+          "type": "string",
+          "fixmlTypeName": "ApplSeqNum_t",
+          "description": "Data sequence number to be used when FIX session is not in effect"
+        },
+        "ApplLastSeqNum": {
+          "type": "string",
+          "fixmlTypeName": "ApplLastSeqNum_t",
+          "description": "Application sequence number of last message in transmission"
+        },
+        "ApplResendFlag": {
+          "type": "string",
+          "fixmlTypeName": "ApplResendFlag_t",
+          "description": "Used to indicate that a message is being sent in response to an Application Message Request. It is possible for both ApplResendFlag and PossDupFlag to be set on the same message if the Sender's cache size is greater than zero and the message is being resent due to a session level resend request"
+        }
+      },
+      "fixmlComponent": "ApplSeqCtrl"
+    },
+    "PtyEntlmnt": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Stat": {
+            "type": "string",
+            "fixmlTypeName": "EntitlementStatus_t"
+          },
+          "PtyDetl": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ID": {
+                  "type": "string",
+                  "fixmlTypeName": "PartyDetailID_t",
+                  "description": "Party identifier within Parties Reference Data messages."
+                },
+                "Src": {
+                  "type": "string",
+                  "fixmlTypeName": "PartyDetailIDSource_t"
+                },
+                "R": {
+                  "type": "string",
+                  "fixmlTypeName": "PartyDetailRole_t"
+                },
+                "Qual": {
+                  "type": "string",
+                  "fixmlTypeName": "PartyDetailRoleQualifier_t"
+                },
+                "Stat": {
+                  "type": "string",
+                  "fixmlTypeName": "PartyDetailStatus_t"
+                },
+                "Sub": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "PartyDetailSubID_t",
+                        "description": "Sub-identifier for the party specified in PartyDetailID(1691)."
+                      },
+                      "Typ": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "fixmlTypeName": "PartySubIDType_enum_t",
+                            "enum": [
+                              "Firm",
+                              "Person",
+                              "System",
+                              "Application",
+                              "Full legal name of firm",
+                              "Postal address",
+                              "Phone number",
+                              "Email address",
+                              "Contact name",
+                              "Securities account number (for settlement instructions)",
+                              "Registration number (for settlement instructions and confirmations)",
+                              "Registered address (for confirmation purposes)",
+                              "Regulatory status (for confirmation purposes)",
+                              "Registration name (for settlement instructions)",
+                              "Cash account number (for settlement instructions)",
+                              "BIC",
+                              "CSD participant member code",
+                              "Registered address",
+                              "Fund account name",
+                              "Telex number",
+                              "Fax number",
+                              "Securities account name",
+                              "Cash account name",
+                              "Department",
+                              "Location desk",
+                              "Position account type",
+                              "Security locate ID",
+                              "Market maker",
+                              "Eligible counterparty",
+                              "Professional client",
+                              "Location",
+                              "Execution venue",
+                              "Currency delivery identifier",
+                              "Address City",
+                              "Address State/Province",
+                              "Address Postal Code",
+                              "Address Street",
+                              "Address Country (ISO country code)",
+                              "ISO country code",
+                              "Market segment",
+                              "Customer account type",
+                              "Omnibus account",
+                              "Funds segregation type",
+                              "Guarantee fund",
+                              "Swap dealer",
+                              "Major participant",
+                              "Financial entity",
+                              "U.S. person",
+                              "Reporting entity indicator",
+                              "Elected clearing requirement exception",
+                              "Business center",
+                              "Reference text",
+                              "Short-marking exempt account",
+                              "Parent firm identifier",
+                              "Parent firm name",
+                              "Deal identifier",
+                              "System trade identifier",
+                              "System trade sub-identifier",
+                              "Futures Commission Merchant (FCM) code",
+                              "Delivery terminal customer account/code",
+                              "Voluntary reporting entity",
+                              "Reporting obligation jurisdiction",
+                              "Voluntary reporting jurisdiction",
+                              "Company activities",
+                              "European Economic Area domiciled",
+                              "Contract linked to commercial or treasury financing for this counterparty",
+                              "Contract above clearing threshold for this counterparty",
+                              "Voluntary reporting party",
+                              "End user",
+                              "Location or jurisdiction",
+                              "Derivatives dealer",
+                              "Domicile",
+                              "Exempt from recognition",
+                              "Payer",
+                              "Receiver",
+                              "Systematic Internaliser (SI)",
+                              "Publishing entity indicator",
+                              "First name",
+                              "Surname",
+                              "Date of birth",
+                              "Order transmitting firm",
+                              "Order transmitting firm for buyer",
+                              "Order transmitter for seller",
+                              "Legal Entity Identifier (ISO 17442) LEI",
+                              "Sub-sector classification",
+                              "Party side",
+                              "Legal registration country"
+                            ],
+                            "enumKey": [
+                              "1",
+                              "2",
+                              "3",
+                              "4",
+                              "5",
+                              "6",
+                              "7",
+                              "8",
+                              "9",
+                              "10",
+                              "11",
+                              "12",
+                              "13",
+                              "14",
+                              "15",
+                              "16",
+                              "17",
+                              "18",
+                              "19",
+                              "20",
+                              "21",
+                              "22",
+                              "23",
+                              "24",
+                              "25",
+                              "26",
+                              "27",
+                              "28",
+                              "29",
+                              "30",
+                              "31",
+                              "32",
+                              "33",
+                              "34",
+                              "35",
+                              "36",
+                              "37",
+                              "38",
+                              "39",
+                              "40",
+                              "41",
+                              "42",
+                              "43",
+                              "44",
+                              "45",
+                              "46",
+                              "47",
+                              "48",
+                              "49",
+                              "50",
+                              "51",
+                              "52",
+                              "53",
+                              "54",
+                              "55",
+                              "56",
+                              "57",
+                              "58",
+                              "59",
+                              "60",
+                              "61",
+                              "62",
+                              "63",
+                              "64",
+                              "65",
+                              "66",
+                              "67",
+                              "68",
+                              "69",
+                              "70",
+                              "71",
+                              "72",
+                              "73",
+                              "74",
+                              "75",
+                              "76",
+                              "77",
+                              "78",
+                              "79",
+                              "80",
+                              "81",
+                              "82",
+                              "83",
+                              "84",
+                              "85",
+                              "86",
+                              "87"
+                            ],
+                            "description": "Type of PartySubID(523) value."
+                          },
+                          {
+                            "type": "integer",
+                            "fixmlTypeName": "Reserved4000Plus",
+                            "minimum": 4000,
+                            "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                          }
+                        ]
+                      }
+                    },
+                    "fixmlComponent": "Sub"
+                  },
+                  "fixmlRepeating": true
+                },
+                "AltPty": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "PartyDetailAltID_t",
+                        "description": "An alternate party identifier for the party specified in PartyDetailID(1691)"
+                      },
+                      "Src": {
+                        "type": "string",
+                        "fixmlTypeName": "PartyDetailAltIDSource_t"
+                      },
+                      "Sub": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "ID": {
+                              "type": "string",
+                              "fixmlTypeName": "PartyDetailAltSubID_t",
+                              "description": "Sub-identifier for the party specified in PartyDetailAltID(1517)."
+                            },
+                            "Typ": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "fixmlTypeName": "PartySubIDType_enum_t",
+                                  "enum": [
+                                    "Firm",
+                                    "Person",
+                                    "System",
+                                    "Application",
+                                    "Full legal name of firm",
+                                    "Postal address",
+                                    "Phone number",
+                                    "Email address",
+                                    "Contact name",
+                                    "Securities account number (for settlement instructions)",
+                                    "Registration number (for settlement instructions and confirmations)",
+                                    "Registered address (for confirmation purposes)",
+                                    "Regulatory status (for confirmation purposes)",
+                                    "Registration name (for settlement instructions)",
+                                    "Cash account number (for settlement instructions)",
+                                    "BIC",
+                                    "CSD participant member code",
+                                    "Registered address",
+                                    "Fund account name",
+                                    "Telex number",
+                                    "Fax number",
+                                    "Securities account name",
+                                    "Cash account name",
+                                    "Department",
+                                    "Location desk",
+                                    "Position account type",
+                                    "Security locate ID",
+                                    "Market maker",
+                                    "Eligible counterparty",
+                                    "Professional client",
+                                    "Location",
+                                    "Execution venue",
+                                    "Currency delivery identifier",
+                                    "Address City",
+                                    "Address State/Province",
+                                    "Address Postal Code",
+                                    "Address Street",
+                                    "Address Country (ISO country code)",
+                                    "ISO country code",
+                                    "Market segment",
+                                    "Customer account type",
+                                    "Omnibus account",
+                                    "Funds segregation type",
+                                    "Guarantee fund",
+                                    "Swap dealer",
+                                    "Major participant",
+                                    "Financial entity",
+                                    "U.S. person",
+                                    "Reporting entity indicator",
+                                    "Elected clearing requirement exception",
+                                    "Business center",
+                                    "Reference text",
+                                    "Short-marking exempt account",
+                                    "Parent firm identifier",
+                                    "Parent firm name",
+                                    "Deal identifier",
+                                    "System trade identifier",
+                                    "System trade sub-identifier",
+                                    "Futures Commission Merchant (FCM) code",
+                                    "Delivery terminal customer account/code",
+                                    "Voluntary reporting entity",
+                                    "Reporting obligation jurisdiction",
+                                    "Voluntary reporting jurisdiction",
+                                    "Company activities",
+                                    "European Economic Area domiciled",
+                                    "Contract linked to commercial or treasury financing for this counterparty",
+                                    "Contract above clearing threshold for this counterparty",
+                                    "Voluntary reporting party",
+                                    "End user",
+                                    "Location or jurisdiction",
+                                    "Derivatives dealer",
+                                    "Domicile",
+                                    "Exempt from recognition",
+                                    "Payer",
+                                    "Receiver",
+                                    "Systematic Internaliser (SI)",
+                                    "Publishing entity indicator",
+                                    "First name",
+                                    "Surname",
+                                    "Date of birth",
+                                    "Order transmitting firm",
+                                    "Order transmitting firm for buyer",
+                                    "Order transmitter for seller",
+                                    "Legal Entity Identifier (ISO 17442) LEI",
+                                    "Sub-sector classification",
+                                    "Party side",
+                                    "Legal registration country"
+                                  ],
+                                  "enumKey": [
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "4",
+                                    "5",
+                                    "6",
+                                    "7",
+                                    "8",
+                                    "9",
+                                    "10",
+                                    "11",
+                                    "12",
+                                    "13",
+                                    "14",
+                                    "15",
+                                    "16",
+                                    "17",
+                                    "18",
+                                    "19",
+                                    "20",
+                                    "21",
+                                    "22",
+                                    "23",
+                                    "24",
+                                    "25",
+                                    "26",
+                                    "27",
+                                    "28",
+                                    "29",
+                                    "30",
+                                    "31",
+                                    "32",
+                                    "33",
+                                    "34",
+                                    "35",
+                                    "36",
+                                    "37",
+                                    "38",
+                                    "39",
+                                    "40",
+                                    "41",
+                                    "42",
+                                    "43",
+                                    "44",
+                                    "45",
+                                    "46",
+                                    "47",
+                                    "48",
+                                    "49",
+                                    "50",
+                                    "51",
+                                    "52",
+                                    "53",
+                                    "54",
+                                    "55",
+                                    "56",
+                                    "57",
+                                    "58",
+                                    "59",
+                                    "60",
+                                    "61",
+                                    "62",
+                                    "63",
+                                    "64",
+                                    "65",
+                                    "66",
+                                    "67",
+                                    "68",
+                                    "69",
+                                    "70",
+                                    "71",
+                                    "72",
+                                    "73",
+                                    "74",
+                                    "75",
+                                    "76",
+                                    "77",
+                                    "78",
+                                    "79",
+                                    "80",
+                                    "81",
+                                    "82",
+                                    "83",
+                                    "84",
+                                    "85",
+                                    "86",
+                                    "87"
+                                  ],
+                                  "description": "Type of PartySubID(523) value."
+                                },
+                                {
+                                  "type": "integer",
+                                  "fixmlTypeName": "Reserved4000Plus",
+                                  "minimum": 4000,
+                                  "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                                }
+                              ]
+                            }
+                          },
+                          "fixmlComponent": "Sub"
+                        },
+                        "fixmlRepeating": true
+                      }
+                    },
+                    "fixmlComponent": "AltPty"
+                  },
+                  "fixmlRepeating": true
+                },
+                "ReltdPtyDetl": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "RelatedPartyDetailID_t",
+                        "description": "Party identifier for the party related to the party specified in PartyDetailID(1691)."
+                      },
+                      "Src": {
+                        "type": "string",
+                        "fixmlTypeName": "RelatedPartyDetailIDSource_t"
+                      },
+                      "R": {
+                        "type": "string",
+                        "fixmlTypeName": "RelatedPartyDetailRole_t"
+                      },
+                      "Qual": {
+                        "type": "string",
+                        "fixmlTypeName": "RelatedPartyDetailRoleQualifier_t"
+                      },
+                      "Sub": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "ID": {
+                              "type": "string",
+                              "fixmlTypeName": "RelatedPartyDetailSubID_t",
+                              "description": "Sub-identifier for the party specified in RelatedPartyID(1563)."
+                            },
+                            "Typ": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "fixmlTypeName": "PartySubIDType_enum_t",
+                                  "enum": [
+                                    "Firm",
+                                    "Person",
+                                    "System",
+                                    "Application",
+                                    "Full legal name of firm",
+                                    "Postal address",
+                                    "Phone number",
+                                    "Email address",
+                                    "Contact name",
+                                    "Securities account number (for settlement instructions)",
+                                    "Registration number (for settlement instructions and confirmations)",
+                                    "Registered address (for confirmation purposes)",
+                                    "Regulatory status (for confirmation purposes)",
+                                    "Registration name (for settlement instructions)",
+                                    "Cash account number (for settlement instructions)",
+                                    "BIC",
+                                    "CSD participant member code",
+                                    "Registered address",
+                                    "Fund account name",
+                                    "Telex number",
+                                    "Fax number",
+                                    "Securities account name",
+                                    "Cash account name",
+                                    "Department",
+                                    "Location desk",
+                                    "Position account type",
+                                    "Security locate ID",
+                                    "Market maker",
+                                    "Eligible counterparty",
+                                    "Professional client",
+                                    "Location",
+                                    "Execution venue",
+                                    "Currency delivery identifier",
+                                    "Address City",
+                                    "Address State/Province",
+                                    "Address Postal Code",
+                                    "Address Street",
+                                    "Address Country (ISO country code)",
+                                    "ISO country code",
+                                    "Market segment",
+                                    "Customer account type",
+                                    "Omnibus account",
+                                    "Funds segregation type",
+                                    "Guarantee fund",
+                                    "Swap dealer",
+                                    "Major participant",
+                                    "Financial entity",
+                                    "U.S. person",
+                                    "Reporting entity indicator",
+                                    "Elected clearing requirement exception",
+                                    "Business center",
+                                    "Reference text",
+                                    "Short-marking exempt account",
+                                    "Parent firm identifier",
+                                    "Parent firm name",
+                                    "Deal identifier",
+                                    "System trade identifier",
+                                    "System trade sub-identifier",
+                                    "Futures Commission Merchant (FCM) code",
+                                    "Delivery terminal customer account/code",
+                                    "Voluntary reporting entity",
+                                    "Reporting obligation jurisdiction",
+                                    "Voluntary reporting jurisdiction",
+                                    "Company activities",
+                                    "European Economic Area domiciled",
+                                    "Contract linked to commercial or treasury financing for this counterparty",
+                                    "Contract above clearing threshold for this counterparty",
+                                    "Voluntary reporting party",
+                                    "End user",
+                                    "Location or jurisdiction",
+                                    "Derivatives dealer",
+                                    "Domicile",
+                                    "Exempt from recognition",
+                                    "Payer",
+                                    "Receiver",
+                                    "Systematic Internaliser (SI)",
+                                    "Publishing entity indicator",
+                                    "First name",
+                                    "Surname",
+                                    "Date of birth",
+                                    "Order transmitting firm",
+                                    "Order transmitting firm for buyer",
+                                    "Order transmitter for seller",
+                                    "Legal Entity Identifier (ISO 17442) LEI",
+                                    "Sub-sector classification",
+                                    "Party side",
+                                    "Legal registration country"
+                                  ],
+                                  "enumKey": [
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "4",
+                                    "5",
+                                    "6",
+                                    "7",
+                                    "8",
+                                    "9",
+                                    "10",
+                                    "11",
+                                    "12",
+                                    "13",
+                                    "14",
+                                    "15",
+                                    "16",
+                                    "17",
+                                    "18",
+                                    "19",
+                                    "20",
+                                    "21",
+                                    "22",
+                                    "23",
+                                    "24",
+                                    "25",
+                                    "26",
+                                    "27",
+                                    "28",
+                                    "29",
+                                    "30",
+                                    "31",
+                                    "32",
+                                    "33",
+                                    "34",
+                                    "35",
+                                    "36",
+                                    "37",
+                                    "38",
+                                    "39",
+                                    "40",
+                                    "41",
+                                    "42",
+                                    "43",
+                                    "44",
+                                    "45",
+                                    "46",
+                                    "47",
+                                    "48",
+                                    "49",
+                                    "50",
+                                    "51",
+                                    "52",
+                                    "53",
+                                    "54",
+                                    "55",
+                                    "56",
+                                    "57",
+                                    "58",
+                                    "59",
+                                    "60",
+                                    "61",
+                                    "62",
+                                    "63",
+                                    "64",
+                                    "65",
+                                    "66",
+                                    "67",
+                                    "68",
+                                    "69",
+                                    "70",
+                                    "71",
+                                    "72",
+                                    "73",
+                                    "74",
+                                    "75",
+                                    "76",
+                                    "77",
+                                    "78",
+                                    "79",
+                                    "80",
+                                    "81",
+                                    "82",
+                                    "83",
+                                    "84",
+                                    "85",
+                                    "86",
+                                    "87"
+                                  ],
+                                  "description": "Type of PartySubID(523) value."
+                                },
+                                {
+                                  "type": "integer",
+                                  "fixmlTypeName": "Reserved4000Plus",
+                                  "minimum": 4000,
+                                  "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                                }
+                              ]
+                            }
+                          },
+                          "fixmlComponent": "Sub"
+                        },
+                        "fixmlRepeating": true
+                      },
+                      "AltPty": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "ID": {
+                              "type": "string",
+                              "fixmlTypeName": "RelatedPartyDetailAltID_t",
+                              "description": "An alternate party identifier for the party specified in RelatedPartyID(1563)."
+                            },
+                            "Src": {
+                              "type": "string",
+                              "fixmlTypeName": "RelatedPartyDetailAltIDSource_t"
+                            },
+                            "Sub": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "ID": {
+                                    "type": "string",
+                                    "fixmlTypeName": "RelatedPartyDetailAltSubID_t",
+                                    "description": "Sub-identifier for the party specified in RelatedPartyDetailAltID(1570)."
+                                  },
+                                  "Typ": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string",
+                                        "fixmlTypeName": "PartySubIDType_enum_t",
+                                        "enum": [
+                                          "Firm",
+                                          "Person",
+                                          "System",
+                                          "Application",
+                                          "Full legal name of firm",
+                                          "Postal address",
+                                          "Phone number",
+                                          "Email address",
+                                          "Contact name",
+                                          "Securities account number (for settlement instructions)",
+                                          "Registration number (for settlement instructions and confirmations)",
+                                          "Registered address (for confirmation purposes)",
+                                          "Regulatory status (for confirmation purposes)",
+                                          "Registration name (for settlement instructions)",
+                                          "Cash account number (for settlement instructions)",
+                                          "BIC",
+                                          "CSD participant member code",
+                                          "Registered address",
+                                          "Fund account name",
+                                          "Telex number",
+                                          "Fax number",
+                                          "Securities account name",
+                                          "Cash account name",
+                                          "Department",
+                                          "Location desk",
+                                          "Position account type",
+                                          "Security locate ID",
+                                          "Market maker",
+                                          "Eligible counterparty",
+                                          "Professional client",
+                                          "Location",
+                                          "Execution venue",
+                                          "Currency delivery identifier",
+                                          "Address City",
+                                          "Address State/Province",
+                                          "Address Postal Code",
+                                          "Address Street",
+                                          "Address Country (ISO country code)",
+                                          "ISO country code",
+                                          "Market segment",
+                                          "Customer account type",
+                                          "Omnibus account",
+                                          "Funds segregation type",
+                                          "Guarantee fund",
+                                          "Swap dealer",
+                                          "Major participant",
+                                          "Financial entity",
+                                          "U.S. person",
+                                          "Reporting entity indicator",
+                                          "Elected clearing requirement exception",
+                                          "Business center",
+                                          "Reference text",
+                                          "Short-marking exempt account",
+                                          "Parent firm identifier",
+                                          "Parent firm name",
+                                          "Deal identifier",
+                                          "System trade identifier",
+                                          "System trade sub-identifier",
+                                          "Futures Commission Merchant (FCM) code",
+                                          "Delivery terminal customer account/code",
+                                          "Voluntary reporting entity",
+                                          "Reporting obligation jurisdiction",
+                                          "Voluntary reporting jurisdiction",
+                                          "Company activities",
+                                          "European Economic Area domiciled",
+                                          "Contract linked to commercial or treasury financing for this counterparty",
+                                          "Contract above clearing threshold for this counterparty",
+                                          "Voluntary reporting party",
+                                          "End user",
+                                          "Location or jurisdiction",
+                                          "Derivatives dealer",
+                                          "Domicile",
+                                          "Exempt from recognition",
+                                          "Payer",
+                                          "Receiver",
+                                          "Systematic Internaliser (SI)",
+                                          "Publishing entity indicator",
+                                          "First name",
+                                          "Surname",
+                                          "Date of birth",
+                                          "Order transmitting firm",
+                                          "Order transmitting firm for buyer",
+                                          "Order transmitter for seller",
+                                          "Legal Entity Identifier (ISO 17442) LEI",
+                                          "Sub-sector classification",
+                                          "Party side",
+                                          "Legal registration country"
+                                        ],
+                                        "enumKey": [
+                                          "1",
+                                          "2",
+                                          "3",
+                                          "4",
+                                          "5",
+                                          "6",
+                                          "7",
+                                          "8",
+                                          "9",
+                                          "10",
+                                          "11",
+                                          "12",
+                                          "13",
+                                          "14",
+                                          "15",
+                                          "16",
+                                          "17",
+                                          "18",
+                                          "19",
+                                          "20",
+                                          "21",
+                                          "22",
+                                          "23",
+                                          "24",
+                                          "25",
+                                          "26",
+                                          "27",
+                                          "28",
+                                          "29",
+                                          "30",
+                                          "31",
+                                          "32",
+                                          "33",
+                                          "34",
+                                          "35",
+                                          "36",
+                                          "37",
+                                          "38",
+                                          "39",
+                                          "40",
+                                          "41",
+                                          "42",
+                                          "43",
+                                          "44",
+                                          "45",
+                                          "46",
+                                          "47",
+                                          "48",
+                                          "49",
+                                          "50",
+                                          "51",
+                                          "52",
+                                          "53",
+                                          "54",
+                                          "55",
+                                          "56",
+                                          "57",
+                                          "58",
+                                          "59",
+                                          "60",
+                                          "61",
+                                          "62",
+                                          "63",
+                                          "64",
+                                          "65",
+                                          "66",
+                                          "67",
+                                          "68",
+                                          "69",
+                                          "70",
+                                          "71",
+                                          "72",
+                                          "73",
+                                          "74",
+                                          "75",
+                                          "76",
+                                          "77",
+                                          "78",
+                                          "79",
+                                          "80",
+                                          "81",
+                                          "82",
+                                          "83",
+                                          "84",
+                                          "85",
+                                          "86",
+                                          "87"
+                                        ],
+                                        "description": "Type of PartySubID(523) value."
+                                      },
+                                      {
+                                        "type": "integer",
+                                        "fixmlTypeName": "Reserved4000Plus",
+                                        "minimum": 4000,
+                                        "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                                      }
+                                    ]
+                                  }
+                                },
+                                "fixmlComponent": "Sub"
+                              },
+                              "fixmlRepeating": true
+                            }
+                          },
+                          "fixmlComponent": "AltPty"
+                        },
+                        "fixmlRepeating": true
+                      },
+                      "Rltnshp": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "Rltnshp": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "fixmlTypeName": "PartyRelationship_enum_t",
+                                  "enum": [
+                                    "Is also",
+                                    "Clears for",
+                                    "Clears through",
+                                    "Trades for",
+                                    "Trades through",
+                                    "Sponsors",
+                                    "Sponsored through",
+                                    "Provides guarantee for",
+                                    "Is guaranteed by",
+                                    "Member of",
+                                    "Has members",
+                                    "Provides marketplace for",
+                                    "Participant of marketplace",
+                                    "Carries positions for",
+                                    "Posts trades to",
+                                    "Enters trades for",
+                                    "Enters trades through",
+                                    "Provides quotes to",
+                                    "Requests quotes from",
+                                    "Invests for",
+                                    "Invests through",
+                                    "Brokers trades for",
+                                    "Brokers trades through",
+                                    "Provides trading services for",
+                                    "Uses trading services of",
+                                    "Approves of",
+                                    "Approved by",
+                                    "Parent firm for",
+                                    "Subsidiary of",
+                                    "Regulatory owner of",
+                                    "Owned by (regulatory)",
+                                    "Controls",
+                                    "Is controlled by",
+                                    "Legal / titled owner of",
+                                    "Owned by (legal / title)",
+                                    "Beneficial owner of",
+                                    "Owned by (beneficial)",
+                                    "Settles for",
+                                    "Settles through"
+                                  ],
+                                  "enumKey": [
+                                    "0",
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "4",
+                                    "5",
+                                    "6",
+                                    "7",
+                                    "8",
+                                    "9",
+                                    "10",
+                                    "11",
+                                    "12",
+                                    "13",
+                                    "14",
+                                    "15",
+                                    "16",
+                                    "17",
+                                    "18",
+                                    "19",
+                                    "20",
+                                    "21",
+                                    "22",
+                                    "23",
+                                    "24",
+                                    "25",
+                                    "26",
+                                    "27",
+                                    "28",
+                                    "29",
+                                    "30",
+                                    "31",
+                                    "32",
+                                    "33",
+                                    "34",
+                                    "35",
+                                    "36",
+                                    "37",
+                                    "38"
+                                  ],
+                                  "description": "Used to specify the type of the party relationship."
+                                },
+                                {
+                                  "type": "integer",
+                                  "fixmlTypeName": "Reserved4000Plus",
+                                  "minimum": 4000,
+                                  "description": "Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                                }
+                              ]
+                            }
+                          },
+                          "fixmlComponent": "Rltnshp"
+                        },
+                        "fixmlRepeating": true
+                      }
+                    },
+                    "fixmlComponent": "ReltdPtyDetl"
+                  },
+                  "fixmlRepeating": true
+                }
+              },
+              "fixmlComponent": "PtyDetl"
+            },
+            "fixmlRepeating": true
+          },
+          "Entlmnt": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Ind": {
+                  "type": "string",
+                  "fixmlTypeName": "EntitlementIndicator_t",
+                  "description": "Used to indicate if a party is entitled to an entitlement type specified in the EntitlementType(1775) field."
+                },
+                "Typ": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "fixmlTypeName": "EntitlementType_enum_t",
+                      "enum": [
+                        "Trade",
+                        "Make markets",
+                        "Hold positions",
+                        "Perform give-ups",
+                        "Submit Indications of Interest (IOIs)",
+                        "Subscribe to market data",
+                        "Short with pre-borrow",
+                        "Submit quote requests",
+                        "Respond to quote requests"
+                      ],
+                      "enumKey": [
+                        "0",
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8"
+                      ],
+                      "description": "Type of entitlement."
+                    },
+                    {
+                      "type": "integer",
+                      "fixmlTypeName": "Reserved100Plus",
+                      "minimum": 100,
+                      "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                    }
+                  ]
+                },
+                "SubTyp": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "fixmlTypeName": "EntitlementSubType_enum_t",
+                      "enum": [
+                        "Order entry",
+                        "Hit/Lift",
+                        "View indicative prices",
+                        "View executable prices",
+                        "Single quote",
+                        "Streaming quotes",
+                        "Single broker",
+                        "Multi brokers"
+                      ],
+                      "enumKey": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8"
+                      ],
+                      "description": "Subtype of an entitlement specified in EntitlementType(1775)."
+                    },
+                    {
+                      "type": "integer",
+                      "fixmlTypeName": "Reserved1000Plus",
+                      "minimum": 1000,
+                      "description": "Values \"1000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                    }
+                  ]
+                },
+                "ID": {
+                  "type": "string",
+                  "fixmlTypeName": "EntitlementID_t",
+                  "description": "Unique identifier for a specific NoEntitlements(1773) repeating group instance."
+                },
+                "Pltfm": {
+                  "type": "string",
+                  "fixmlTypeName": "EntitlementPlatform_t",
+                  "description": "The area to which the entitlement is applicable. This can be a trading platform or an offering."
+                },
+                "StartDt": {
+                  "type": "string",
+                  "fixmlTypeName": "EntitlementStartDate_t",
+                  "description": "Indicates the starting date of the entitlement."
+                },
+                "EndDt": {
+                  "type": "string",
+                  "fixmlTypeName": "EntitlementEndDate_t",
+                  "description": "Indicates the ending date of the entitlement."
+                },
+                "Attrib": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Typ": {
+                        "type": "integer",
+                        "fixmlTypeName": "EntitlementAttribType_t",
+                        "description": "Name of the entitlement attribute type. A code list of allowed values will be maintained on the FIX Protocol website. \n                    Values \"4000\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                      },
+                      "Datatyp": {
+                        "type": "string",
+                        "fixmlTypeName": "EntitlementAttribDatatype_t"
+                      },
+                      "Value": {
+                        "type": "string",
+                        "fixmlTypeName": "EntitlementAttribValue_t",
+                        "description": "Value of the entitlement attribute."
+                      },
+                      "Ccy": {
+                        "type": "string",
+                        "fixmlTypeName": "EntitlementAttribCurrency_t",
+                        "description": "Currency for EntitlementAttribValue(1780). Can be used if these fields represent a price, price offset, or amount."
+                      },
+                      "CcySrc": {
+                        "type": "string",
+                        "fixmlTypeName": "EntitlementAttribCurrencyCodeSource_t"
+                      }
+                    },
+                    "fixmlComponent": "Attrib"
+                  },
+                  "fixmlRepeating": true
+                },
+                "InstrmtScope": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Oper": {
+                        "type": "string",
+                        "fixmlTypeName": "InstrumentScopeOperator_t"
+                      },
+                      "AID": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "AltID": {
+                              "type": "string",
+                              "fixmlTypeName": "InstrumentScopeSecurityAltID_t",
+                              "description": "Used to limit instrument scope to specified security alternate identifier. \n                    See SecurityAltID(455) field for description."
+                            },
+                            "AltIDSrc": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "fixmlTypeName": "SecurityIDSource_enum_t",
+                                  "enum": [
+                                    "CUSIP",
+                                    "SEDOL",
+                                    "QUIK",
+                                    "ISIN",
+                                    "RIC",
+                                    "ISO Currency Code (ISO 4217)",
+                                    "ISO Country Code",
+                                    "Exchange symbol",
+                                    "Consolidated Tape Association (CTA) Symbol (SIAC CTS/CQS line format)",
+                                    "Bloomberg Symbol",
+                                    "Wertpapier",
+                                    "Dutch",
+                                    "Valoren",
+                                    "Sicovam",
+                                    "Belgian",
+                                    "\"Common\" (Clearstream and Euroclear)",
+                                    "Clearing house / Clearing organization",
+                                    "ISDA/FpML product specification (XML in SecurityXML(1185))",
+                                    "Option Price Reporting Authority",
+                                    "ISDA/FpML product URL (URL in SecurityID(48))",
+                                    "Letter of credit",
+                                    "Marketplace-assigned Identifier",
+                                    "Markit RED entity CLIP",
+                                    "Markit RED pair CLIP",
+                                    "CFTC commodity code",
+                                    "ISDA Commodity Reference Price",
+                                    "Financial Instrument Global Identifier",
+                                    "Legal entity identifier",
+                                    "Synthetic",
+                                    "Fidessa Instrument Mnemonic (FIM)",
+                                    "Index name",
+                                    "Uniform Symbol (UMTF Symbol)",
+                                    "Digital Token Identifier (ISO 24165)"
+                                  ],
+                                  "enumKey": [
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "4",
+                                    "5",
+                                    "6",
+                                    "7",
+                                    "8",
+                                    "9",
+                                    "A",
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y"
+                                  ],
+                                  "description": "Identifies class or source of the SecurityID(48) value."
+                                },
+                                {
+                                  "type": "integer",
+                                  "fixmlTypeName": "Reserved100Plus",
+                                  "minimum": 100,
+                                  "description": "Values \"100\" and above are reserved for bilaterally agreed upon user defined enumerations."
+                                }
+                              ]
+                            }
+                          },
+                          "fixmlComponent": "AID"
+                        },
+                        "fixmlRepeating": true
+                      }
+                    },
+                    "fixmlComponent": "InstrmtScope"
+                  },
+                  "fixmlRepeating": true
+                },
+                "MktSegScope": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "MktID": {
+                        "type": "string",
+                        "fixmlTypeName": "MarketID_t",
+                        "description": "Identifies the market"
+                      },
+                      "MktSegID": {
+                        "type": "string",
+                        "fixmlTypeName": "MarketSegmentID_t",
+                        "description": "Identifies the market segment"
+                      }
+                    },
+                    "fixmlComponent": "MktSegScope"
+                  },
+                  "fixmlRepeating": true
+                }
+              },
+              "fixmlComponent": "Entlmnt"
+            },
+            "fixmlRepeating": true
+          }
+        },
+        "fixmlComponent": "PtyEntlmnt"
+      },
+      "fixmlRepeating": true
+    }
+  },
+  "required": [
+    "RptID"
+  ],
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "Hdr": {
+          "type": "object",
+          "properties": {},
+          "fixmlComponent": "Hdr",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "MsgTyp": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgType_t"
+                },
+                "ApplVerID": {
+                  "type": "string",
+                  "fixmlTypeName": "ApplVerID_t"
+                },
+                "SID": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderCompID_t",
+                  "description": "Assigned value used to identify firm sending message."
+                },
+                "TID": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetCompID_t",
+                  "description": "Assigned value used to identify receiving firm."
+                },
+                "OBID": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfCompID_t",
+                  "description": "Assigned value used to identify firm originating message if the message was delivered by a third party i.e. the third party firm identifier would be delivered in the SenderCompID field and the firm originating the message in this field."
+                },
+                "D2ID": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToCompID_t",
+                  "description": "Assigned value used to identify the firm targeted to receive the message if the message is delivered by a third party i.e. the third party firm identifier would be delivered in the TargetCompID (56) field and the ultimate receiver firm ID in this field."
+                },
+                "SeqNum": {
+                  "type": "string",
+                  "fixmlTypeName": "MsgSeqNum_t",
+                  "description": "Integer message sequence number."
+                },
+                "SSub": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderSubID_t",
+                  "description": "Assigned value used to identify specific message originator (desk, trader, etc.)"
+                },
+                "SLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "SenderLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader)"
+                },
+                "TSub": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetSubID_t",
+                  "description": "Assigned value used to identify specific individual or unit intended to receive message. \"ADMIN\" reserved for administrative messages not intended for a specific user."
+                },
+                "TLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "TargetLocationID_t",
+                  "description": "Assigned value used to identify specific message destination's location (i.e. geographic location and/or desk, trader)"
+                },
+                "OBSub": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfSubID_t",
+                  "description": "Assigned value used to identify specific message originator (i.e. trader) if the message was delivered by a third party"
+                },
+                "OBLoc": {
+                  "type": "string",
+                  "fixmlTypeName": "OnBehalfOfLocationID_t",
+                  "description": "Assigned value used to identify specific message originator's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "D2Sub": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToSubID_t",
+                  "description": "Assigned value used to identify specific message recipient (i.e. trader) if the message is delivered by a third party"
+                },
+                "D2Loc": {
+                  "type": "string",
+                  "fixmlTypeName": "DeliverToLocationID_t",
+                  "description": "Assigned value used to identify specific message recipient's location (i.e. geographic location and/or desk, trader) if the message was delivered by a third party"
+                },
+                "PosDup": {
+                  "type": "string",
+                  "fixmlTypeName": "PossDupFlag_t"
+                },
+                "PosRsnd": {
+                  "type": "string",
+                  "fixmlTypeName": "PossResend_t"
+                },
+                "Snt": {
+                  "type": "string",
+                  "fixmlTypeName": "SendingTime_t",
+                  "description": "Time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\")"
+                },
+                "OrigSnt": {
+                  "type": "string",
+                  "fixmlTypeName": "OrigSendingTime_t",
+                  "description": "Original time of message transmission (always expressed in UTC (Universal Time Coordinated, also known as \"GMT\") when transmitting orders as the result of a resend request."
+                },
+                "MsgEncd": {
+                  "type": "string",
+                  "fixmlTypeName": "MessageEncoding_t",
+                  "description": "Type of message encoding (non-ASCII (non-English) characters) used in a message's \"Encoded\" fields."
+                },
+                "Hop": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "fixmlTypeName": "HopCompID_t",
+                        "description": "Assigned value used to identify the third party firm which delivered a specific message either from the firm which originated the message or from another third party (if multiple \"hops\" are performed). It is recommended that this value be the SenderCompID (49) of the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Snt": {
+                        "type": "string",
+                        "fixmlTypeName": "HopSendingTime_t",
+                        "description": "Time that HopCompID (628) sent the message. It is recommended that this value be the SendingTime (52) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      },
+                      "Ref": {
+                        "type": "string",
+                        "fixmlTypeName": "HopRefID_t",
+                        "description": "Reference identifier assigned by HopCompID (628) associated with the message sent. It is recommended that this value be the MsgSeqNum (34) of the message sent by the third party. \n                    Applicable when messages are communicated/re-distributed via third parties which function as service bureaus or \"hubs\". Only applicable if OnBehalfOfCompID (115) is being used."
+                      }
+                    },
+                    "fixmlComponent": "Hop"
+                  },
+                  "fixmlRepeating": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "x-fixml-metadata": {
+    "messageType": "PtyEntlmntRpt",
+    "generatedAt": "2025-09-03T12:08:40.439Z",
+    "generator": "FIXML to JSON Schema Converter"
+  }
+}
